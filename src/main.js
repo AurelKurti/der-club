@@ -110,6 +110,29 @@ async function boot() {
   game.dialog.onClose = resumeIfIdle;
   game.diary._onHide = resumeIfIdle;
 
+  // Tab-Out-Recovery: wenn Browser den Tab fokussiert UND Spieler ist
+  // unlocked (Browser hat Pointer-Lock bei Tab-Wechsel aufgegeben), zeige
+  // Start-Overlay im "resume"-Mode. Ohne diesen Handler fehlte der sichere
+  // Re-Entry-Weg nach Cmd+Tab / Alt+Tab.
+  const handleTabReturn = () => {
+    if (document.hidden) return;
+    // Browser könnte Pointer-Lock automatisch aufgegeben haben
+    if (!game.player.isLocked() && !game.isUIBlocked()) {
+      startOverlay.show(initialStart ? 'start' : 'resume');
+    }
+  };
+  document.addEventListener('visibilitychange', handleTabReturn);
+  window.addEventListener('focus', handleTabReturn);
+
+  // Pointer-Lock-Error-Handler: Browser lehnt Request ab (z.B. kurz nach ESC)
+  document.addEventListener('pointerlockerror', () => {
+    console.warn('[Der Club] Pointer-Lock abgelehnt. Klicke erneut.');
+    // Fallback: zeige Overlay, damit User erneut klicken kann
+    if (!game.player.isLocked() && !game.isUIBlocked()) {
+      startOverlay.show('resume');
+    }
+  });
+
   game.start();
 
   // Flow: Trigger-Warnung → Intro → StartOverlay. Alles nur beim ersten Besuch.
