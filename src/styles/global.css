@@ -30,7 +30,10 @@ html, body {
   z-index: 10;
 }
 
-#ui-root > * {
+/* Direkte Kinder von ui-root empfangen Klicks — aber wenn sie .hidden haben
+   NICHT. `display: none` kommt via .hidden und entfernt das Element vom
+   Layout (inkl. pointer-events). */
+#ui-root > *:not(.hidden) {
   pointer-events: auto;
 }
 
@@ -87,6 +90,7 @@ html, body {
 .objective-tracker.hidden {
   opacity: 0;
   transform: translateX(-50%) translateY(-12px);
+  display: none !important;
 }
 .objective-tracker.active .obj-icon {
   color: #d8b878;
@@ -109,16 +113,13 @@ html, body {
   position: fixed;
   inset: 0;
   background: rgba(8, 6, 4, 0.85);
-  backdrop-filter: blur(3px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 120; /* über Dialog (110), unter Credits (150) */
-  transition: opacity 300ms ease;
 }
 .continue-prompt.hidden {
-  opacity: 0;
-  pointer-events: none;
+  display: none !important; /* komplett aus Layout entfernt, blockiert garantiert keine Klicks */
 }
 .continue-box {
   text-align: center;
@@ -185,6 +186,7 @@ html, body {
   opacity: 0;
   transform: translateX(-50%) translateY(12px);
   pointer-events: none;
+  display: none !important;
 }
 .hud-hint kbd {
   display: inline-block;
@@ -202,12 +204,14 @@ html, body {
   position: fixed;
   inset: 0;
   background: rgba(10, 10, 10, 0.88);
-  backdrop-filter: blur(2px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 100;
   transition: opacity 400ms ease;
+}
+.start-overlay.hidden {
+  display: none !important;
 }
 .start-content[data-mode="resume"] h1 {
   font-size: 2.6em;
@@ -217,10 +221,6 @@ html, body {
   margin-bottom: 1.5em;
   font-size: 1em;
   color: #b8b0a0;
-}
-.start-overlay.hidden {
-  opacity: 0;
-  pointer-events: none;
 }
 .start-content {
   text-align: center;
@@ -321,6 +321,7 @@ html, body {
   opacity: 0;
   pointer-events: none;
   transform: translateX(-50%) translateY(20px);
+  display: none !important;
 }
 .dialog-speaker {
   font-family: 'Cormorant Garamond', Georgia, serif;
@@ -431,6 +432,7 @@ html, body {
   opacity: 0;
   pointer-events: none;
   transform: translateX(-50%) translateY(6px);
+  display: none !important;
 }
 .interact-hint kbd {
   display: inline-block;
@@ -463,6 +465,7 @@ html, body {
 .intro-screen.hidden {
   opacity: 0;
   pointer-events: none;
+  display: none !important;
 }
 .intro-content {
   max-width: 640px;
@@ -527,6 +530,7 @@ html, body {
 .trigger-warning.hidden {
   opacity: 0;
   pointer-events: none;
+  display: none !important;
 }
 .tw-content {
   max-width: 520px;
@@ -580,6 +584,7 @@ html, body {
 .diary-overlay.hidden {
   opacity: 0;
   pointer-events: none;
+  display: none !important;
 }
 .diary-content {
   max-width: 680px;
