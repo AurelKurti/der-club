@@ -8,6 +8,7 @@ import { Inventory } from '../ui/Inventory.js';
 import { Diary } from '../ui/Diary.js';
 import { Toast } from '../ui/Toast.js';
 import { ObjectiveTracker } from '../ui/ObjectiveTracker.js';
+import { ContinuePrompt } from '../ui/ContinuePrompt.js';
 import { AudioManager } from './AudioManager.js';
 import { FootstepTracker } from './FootstepTracker.js';
 
@@ -62,6 +63,7 @@ export class Game {
     this.diary = new Diary(this.save);
     this.toast = new Toast();
     this.objective = new ObjectiveTracker();
+    this.continuePrompt = new ContinuePrompt(this.player);
 
     // Toast bei neuem Tagebuch-Eintrag
     this.save.onDiaryChange((entry) => {
@@ -83,6 +85,7 @@ export class Game {
     return !!this.activeMiniGame
         || this.dialog?.isOpen()
         || this.diary?.isOpen()
+        || !!this.continuePrompt?.isVisible()
         || !!document.querySelector('.credits-overlay')
         || !!document.querySelector('.trigger-warning:not(.hidden)');
   }
@@ -165,7 +168,7 @@ export class Game {
    * wartet auf 'won' | 'skipped' | 'failed'.
    */
   async startMiniGame(minigame) {
-    // Double-invoke-Schutz — verhindert zwei Mini-Game-Overlays gleichzeitig
+    // Double-invoke-Schutz
     if (this.activeMiniGame) {
       console.warn('[Game] Mini-Game already active, ignoring new startMiniGame call');
       return 'skipped';
@@ -174,9 +177,12 @@ export class Game {
     if (this.player.isLocked()) this.player.unlock();
     const result = await minigame.run();
     this.activeMiniGame = null;
-    // KEIN _triggerResume() hier — sonst zeigt Start-Overlay mitten in
-    // Room-Folge-Dialogen auf. Das Overlay wird erst nach dem LETZTEN Dialog
-    // via Dialog.onClose → resumeIfIdle getriggert (sauber orchestriert).
+
+    // EXPLIZITE Continue-Overlay — 100% zuverlässig, kein Auto-Lock-Glücksspiel.
+    // User MUSS klicken, Click-Gesture triggert Pointer-Lock garantiert.
+    if (!this.player.isLocked()) {
+      await this.continuePrompt.wait('Mini-Spiel beendet');
+    }
     return result;
   }
 }

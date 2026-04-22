@@ -104,6 +104,66 @@ html, body {
   50% { opacity: 1.0; }
 }
 
+/* ==== Continue Prompt (nach Mini-Game) ==== */
+.continue-prompt {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 6, 4, 0.85);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 120; /* über Dialog (110), unter Credits (150) */
+  transition: opacity 300ms ease;
+}
+.continue-prompt.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.continue-box {
+  text-align: center;
+  padding: 40px 60px;
+  background: rgba(20, 14, 10, 0.95);
+  border: 1px solid rgba(216, 184, 120, 0.5);
+  border-radius: 4px;
+  animation: continuePulse 2s ease-in-out infinite;
+}
+@keyframes continuePulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(216, 184, 120, 0.2); }
+  50% { box-shadow: 0 4px 30px rgba(216, 184, 120, 0.5); }
+}
+.continue-hint {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.3em;
+  color: #8a8a8a;
+  font-style: italic;
+  margin-bottom: 24px;
+}
+.continue-btn {
+  padding: 16px 48px;
+  background: transparent;
+  color: #f4e8d0;
+  border: 2px solid #d8b878;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: 1.15em;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 200ms ease;
+  font-weight: 500;
+}
+.continue-btn:hover {
+  background: rgba(216, 184, 120, 0.18);
+  border-color: #f4e8d0;
+  color: #ffffff;
+  transform: scale(1.03);
+}
+.continue-sub {
+  margin-top: 14px;
+  color: #6a6860;
+  font-size: 0.85em;
+}
+
 /* ==== Toast ==== */
 .toast {
   position: fixed;

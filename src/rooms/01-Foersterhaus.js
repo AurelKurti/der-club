@@ -374,20 +374,90 @@ export class Foersterhaus extends BaseRoom {
       ]);
     }, 'Kirschbaum');
 
-    // Boxhandschuhe auf der Werkbank — das Schlüssel-Objekt
+    // Boxhandschuhe auf der Werkbank — aus primitiven Geometrien geformt
     const gloves = new THREE.Group();
-    const gloveMat = new THREE.MeshStandardMaterial({
-      color: 0x2a1a0a,
-      roughness: 0.6,
-      emissive: 0x1a0a04,
-      emissiveIntensity: 0.3
+    const leatherMat = new THREE.MeshStandardMaterial({
+      color: 0x1a0a04,
+      roughness: 0.75,
+      metalness: 0.1,
+      emissive: 0x0a0502,
+      emissiveIntensity: 0.15
     });
-    const g1 = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.14, 0.22), gloveMat);
-    const g2 = g1.clone();
-    g1.position.set(-0.12, 0, 0);
-    g2.position.set(0.12, 0, 0);
-    gloves.add(g1);
-    gloves.add(g2);
+    const leatherMatDark = new THREE.MeshStandardMaterial({
+      color: 0x120804,
+      roughness: 0.85
+    });
+    const stitchMat = new THREE.MeshStandardMaterial({
+      color: 0x8a6840,
+      roughness: 0.8
+    });
+
+    const makeGlove = (side) => {
+      const glove = new THREE.Group();
+      const flip = side === 'R' ? -1 : 1;
+
+      // Hauptkörper — ovaler Dome (gedrückte Sphere)
+      const main = new THREE.Mesh(
+        new THREE.SphereGeometry(0.09, 14, 10),
+        leatherMat
+      );
+      main.scale.set(1.1, 0.85, 1.3);
+      main.position.y = 0.06;
+      main.castShadow = true;
+      glove.add(main);
+
+      // Daumen — kleinere Sphere schräg angesetzt
+      const thumb = new THREE.Mesh(
+        new THREE.SphereGeometry(0.045, 10, 8),
+        leatherMat
+      );
+      thumb.position.set(flip * 0.07, 0.04, -0.06);
+      thumb.scale.set(0.9, 0.9, 1.2);
+      thumb.castShadow = true;
+      glove.add(thumb);
+
+      // Handgelenk-Manschette (Cylinder, nach unten)
+      const cuff = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.065, 0.07, 0.08, 16),
+        leatherMatDark
+      );
+      cuff.position.set(0, -0.015, 0.10);
+      cuff.rotation.x = 0.2;
+      cuff.castShadow = true;
+      glove.add(cuff);
+
+      // Manschetten-Rand
+      const cuffEdge = new THREE.Mesh(
+        new THREE.TorusGeometry(0.068, 0.01, 6, 20),
+        stitchMat
+      );
+      cuffEdge.position.set(0, -0.055, 0.10);
+      cuffEdge.rotation.x = Math.PI / 2 + 0.2;
+      glove.add(cuffEdge);
+
+      // Naht-Detail an Haupt-Sphere (zierlicher Torus)
+      const seam = new THREE.Mesh(
+        new THREE.TorusGeometry(0.095, 0.004, 4, 20),
+        stitchMat
+      );
+      seam.rotation.x = Math.PI / 2;
+      seam.position.y = 0.06;
+      seam.scale.set(1.0, 1.3, 1.0);
+      glove.add(seam);
+
+      return glove;
+    };
+
+    const leftGlove = makeGlove('L');
+    leftGlove.position.set(-0.14, 0, 0);
+    leftGlove.rotation.y = -0.3;
+    gloves.add(leftGlove);
+
+    const rightGlove = makeGlove('R');
+    rightGlove.position.set(0.12, 0, -0.03);
+    rightGlove.rotation.y = 0.5;
+    gloves.add(rightGlove);
+
     gloves.position.set(7, 1.0, -3);
     gloves.rotation.y = -0.3;
     scene.add(gloves);
