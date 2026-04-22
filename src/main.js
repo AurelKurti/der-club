@@ -93,15 +93,19 @@ async function boot() {
   const startOverlay = createStartOverlay(() => game.player.lock());
 
   // Zeigt Start-Overlay, wenn der Spieler keine Maus-Lock hat und kein UI aktiv ist.
-  // Wird aus mehreren Pfaden aufgerufen (ESC, Mini-Game-Ende, Dialog-Ende).
+  // Context-aware: beim erstem Mal "start", danach "resume" (kompakte UI).
+  let initialStart = true;
   const resumeIfIdle = () => {
     if (!game.player.isLocked() && !game.isUIBlocked()) {
-      startOverlay.show();
+      startOverlay.show(initialStart ? 'start' : 'resume');
     }
   };
 
   game.player.onUnlock(resumeIfIdle);
-  game.player.onLock(() => startOverlay.hide());
+  game.player.onLock(() => {
+    initialStart = false; // ab erstem Lock: "resume"-Mode
+    startOverlay.hide();
+  });
   game.onResumeNeeded(resumeIfIdle);
   game.dialog.onClose = resumeIfIdle;
   game.diary._onHide = resumeIfIdle;

@@ -138,26 +138,22 @@ export class InternatKeller extends BaseRoom {
   }
 
   _buildLighting(scene) {
-    scene.add(new THREE.AmbientLight(0x402818, 0.08));
+    // Deutlich heller als vorher, damit Pater Gerald & Regale sichtbar sind
+    scene.add(new THREE.AmbientLight(0x604838, 0.25));
 
-    // Einzelne Glühbirnen als Punktlichter entlang des Gangs
+    // Glühbirnen-Reihe mit stärkeren PointLights
     for (let z = -14; z <= 14; z += 7) {
-      const lamp = new THREE.PointLight(0xff7828, 1.0, 9);
+      const lamp = new THREE.PointLight(0xff9050, 1.8, 14);
       lamp.position.set(0, 3.0, z);
-      lamp.castShadow = true;
-      lamp.shadow.mapSize.width = 512;
-      lamp.shadow.mapSize.height = 512;
       scene.add(lamp);
 
-      // Glühbirne als emissive Sphere
       const bulb = new THREE.Mesh(
-        new THREE.SphereGeometry(0.06, 8, 8),
-        new THREE.MeshBasicMaterial({ color: 0xffae5a })
+        new THREE.SphereGeometry(0.08, 8, 8),
+        new THREE.MeshBasicMaterial({ color: 0xffc880 })
       );
       bulb.position.copy(lamp.position);
       scene.add(bulb);
 
-      // Kabel (dünner Cylinder nach oben)
       const wire = new THREE.Mesh(
         new THREE.CylinderGeometry(0.015, 0.015, 0.4, 6),
         new THREE.MeshBasicMaterial({ color: 0x1a1a1a })
@@ -166,8 +162,15 @@ export class InternatKeller extends BaseRoom {
       scene.add(wire);
     }
 
-    // Schwächere Akzent-Beleuchtung am Ende (nahe Pater Gerald)
-    const accent = new THREE.PointLight(0xaa5830, 0.6, 6);
+    // Gezielter Spot auf Pater Gerald (dass er sofort auffällt)
+    const paterSpot = new THREE.SpotLight(0xffc080, 2.5, 8, Math.PI / 5, 0.5);
+    paterSpot.position.set(0, 3.2, -8);
+    paterSpot.target.position.set(0, 0.9, -10);
+    scene.add(paterSpot);
+    scene.add(paterSpot.target);
+
+    // Warmer Fill am Ende
+    const accent = new THREE.PointLight(0xffa060, 1.2, 8);
     accent.position.set(0, 2.0, -10);
     scene.add(accent);
   }
@@ -185,7 +188,7 @@ export class InternatKeller extends BaseRoom {
     let paterTalked = false;
     this.addInteractable(pater, async () => {
       if (paterTalked) {
-        await this.ctx.dialog.show('Pater Gerald nickt: «You know what to do.»');
+        await this.ctx.dialog.show('Pater Gerald nickt. Er hat schon genug gesagt.');
         return;
       }
       paterTalked = true;
@@ -229,7 +232,7 @@ export class InternatKeller extends BaseRoom {
         return;
       }
       await this.ctx.dialog.show([
-        { speaker: 'Pater Gerald', text: '«Show me what you have. Left. Right. On the beat.»' }
+        { speaker: 'Pater Gerald', text: '«Show me what you have. Left. Right. On the beat.» («Zeig mir, was du kannst. Links, rechts, im Takt.»)' }
       ]);
       const result = await this.ctx.game.startMiniGame(new BoxRhythm(this.ctx));
       this._minigameDone = true;
@@ -239,7 +242,7 @@ export class InternatKeller extends BaseRoom {
       }
 
       await this.ctx.dialog.show([
-        { speaker: 'Pater Gerald', text: '«Go. It is late.»' }
+        { speaker: 'Pater Gerald', text: '«Go. It is late.» («Geh. Es ist spät.»)' }
       ]);
 
       // Ausgang aktivieren

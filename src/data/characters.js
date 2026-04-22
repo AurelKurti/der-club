@@ -8,7 +8,7 @@
 export const CHAR = {
   mutter: {
     profile: 'mutter',
-    color: 0xfff4d0,
+    color: 0xf4e4b8,
     tint: 0xffe4a0,
     garten: [
       { speaker: 'Mutter', text: '«Ich kenne jedes Kraut in diesem Wald.»' },
@@ -18,7 +18,7 @@ export const CHAR = {
 
   vater: {
     profile: 'vater',
-    color: 0x2a2420,
+    color: 0x7a6a58,
     werkbank: [
       { speaker: 'Vater', text: '«Meistens ist alles im Leben grau.»' },
       { speaker: 'Vater', text: '«Aber manchmal gibt es nur Richtig und Falsch. Und wenn Stärkere Schwächeren Leid antun, ist das falsch.»' },
@@ -28,7 +28,7 @@ export const CHAR = {
 
   alexJung: {
     profile: 'alexJung',
-    color: 0x1a1a2a,
+    color: 0x6878a0,
     tint: 0x4a3a50,
     opacity: 0.6,
     nacht: [
@@ -40,7 +40,7 @@ export const CHAR = {
 
   alex: {
     profile: 'alex',
-    color: 0x0a0a0a,
+    color: 0x8a8aa0,
     buero: [
       { speaker: 'Alex', text: '«Hans. Es gibt im Pitt Club eine Gruppe. Sie nennen sich die Schmetterlinge.»' },
       { speaker: 'Alex', text: '«Sie laden Studentinnen mit gefälschten Briefen zu Partys ein. Dann drogen sie sie.»' },
@@ -59,7 +59,7 @@ export const CHAR = {
 
   charlotte: {
     profile: 'charlotte',
-    color: 0x2a1010,
+    color: 0xd0a898,
     tint: 0xd88878,
     somerset: [
       { speaker: 'Charlotte', text: '«Meine Mutter ist an einer Nervenkrankheit gestorben, als ich fünfzehn war.»' },
@@ -70,7 +70,7 @@ export const CHAR = {
 
   angus: {
     profile: 'angus',
-    color: 0x101010,
+    color: 0x8a8a90,
     pittclub: [
       { speaker: 'Angus Farewell', text: '«Ich habe dich vorgeschlagen, Hans.»' },
       { speaker: 'Angus Farewell', text: '«Du gehörst jetzt dazu.»' },
@@ -80,7 +80,7 @@ export const CHAR = {
 
   josh: {
     profile: 'josh',
-    color: 0x3a3a3a,
+    color: 0x9a9a9a,
     pittclub: [
       { speaker: 'Josh', text: '«Komm mit nach hinten, Bruder. Das ist unsere Nacht.»' }
     ]
@@ -88,7 +88,7 @@ export const CHAR = {
 
   billy: {
     profile: 'billy',
-    color: 0x2a1a0a,
+    color: 0xa07048,
     ring: [
       { speaker: 'Billy', text: '«Bringt dir Glück.»' },
       { text: 'Er reichte mir eine handpolierte Kastanie.' }
@@ -97,16 +97,18 @@ export const CHAR = {
 
   paterGerald: {
     profile: 'paterGerald',
-    color: 0x0a0a0a,
+    color: 0x6a5040,
     keller: [
-      { speaker: 'Pater Gerald', text: '«Your left is too low.»' },
+      // Pater Gerald spricht im Buch Englisch (sudanesischer Mönch),
+      // deshalb bewusst zweisprachig belassen mit DE-Ergänzung.
+      { speaker: 'Pater Gerald', text: '«Your left is too low.» («Deine Linke ist zu tief.»)' },
       { speaker: 'Pater Gerald', text: '«Tu das Gegenteil von dem, was dein Gegner erwartet.»' }
     ]
   },
 
   magicMike: {
     profile: 'magicMike',
-    color: 0x2a2a3a,
+    color: 0x8888a0,
     halle: [
       { speaker: 'Magic Mike', text: '«Gott hat mir dieses Team als Prüfung gegeben.»' }
     ]

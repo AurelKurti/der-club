@@ -74,15 +74,16 @@ export class Dialog {
   }
 
   _advance() {
-    this.audio?.uiClick();
     const isLast = this._index >= this._lines.length - 1;
 
-    // WICHTIG: requestPointerLock SYNCHRON in der Gesture vor dem hide()
-    // damit Browser den Lock nicht verwirft.
+    // WICHTIG: requestPointerLock ALLERERSTE Sync-Aktion im Gesture-Handler
+    // — vor audio.uiClick(), vor DOM-Manipulation — damit Browser den Lock
+    // nicht als "Activation consumed" verwirft.
     if (isLast && this.player && !this.player.isLocked()) {
       try { this.player.lock(); } catch { /* ignore */ }
     }
 
+    this.audio?.uiClick();
     this._index++;
     if (this._index >= this._lines.length) {
       this.hide();

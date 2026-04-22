@@ -153,8 +153,8 @@ export class BoxRhythm extends BaseMiniGame {
     clearInterval(this._tickInterval);
     const ratio = this.hits / TOTAL_HITS;
     const summary = ratio >= 0.66
-      ? 'Pater Gerald nickt: «You\'re getting better, son.»'
-      : 'Pater Gerald: «Your left is too low.»';
+      ? 'Pater Gerald nickt: «You\'re getting better, son.» («Du wirst besser, mein Sohn.»)'
+      : 'Pater Gerald: «Your left is too low.» («Deine Linke ist zu tief.»)';
 
     if (!this.bodyEl) return;
     this.bodyEl.innerHTML = `

@@ -77,7 +77,10 @@ function _makeCanvas(p) {
   const ctx = c.getContext('2d');
 
   ctx.clearRect(0, 0, c.width, c.height);
-  ctx.fillStyle = '#000';
+  // WICHTIG: Canvas zeichnet WEISS. Die Material-Color modiliert dann die
+  // tatsächliche Silhouetten-Farbe. Früher war alles '#000' → jede CHAR-Color
+  // wurde mit Schwarz multipliziert = immer unsichtbar-schwarz.
+  ctx.fillStyle = '#ffffff';
 
   // Kopf (mit optional Haaren)
   const cx = 64 + p.posture;

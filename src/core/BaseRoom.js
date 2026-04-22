@@ -33,8 +33,11 @@ export class BaseRoom {
   /** Override: Per-Frame-Update (Animationen, Partikel). */
   update(_delta) { /* optional */ }
 
-  /** Bounding Box aus Mesh generieren und als Collider registrieren. */
+  /** Bounding Box aus Mesh generieren und als Collider registrieren.
+   *  Aktualisiert zuerst WorldMatrix durch alle Eltern (kritisch, sonst sind
+   *  Collider von Meshes innerhalb von Groups an falscher Position → unsichtbare Wände). */
   addCollider(mesh, shrinkFactor = 1.0) {
+    mesh.updateWorldMatrix(true, false); // ensures parent transforms applied
     const box = new THREE.Box3().setFromObject(mesh);
     if (shrinkFactor !== 1.0) {
       const center = box.getCenter(new THREE.Vector3());

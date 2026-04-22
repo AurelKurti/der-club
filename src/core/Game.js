@@ -49,7 +49,9 @@ export class Game {
   }
 
   _initPlayer() {
-    this.player = new Player(this.camera, document.body);
+    // WICHTIG: Canvas als Pointer-Lock-Target (nicht document.body),
+    // damit PointerLockControls.isLocked korrekt reflektiert wird.
+    this.player = new Player(this.camera, this.canvas);
   }
 
   _initUI() {

@@ -141,12 +141,22 @@ html, body {
 .start-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(10, 10, 10, 0.92);
+  background: rgba(10, 10, 10, 0.88);
+  backdrop-filter: blur(2px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 100;
   transition: opacity 400ms ease;
+}
+.start-content[data-mode="resume"] h1 {
+  font-size: 2.6em;
+  margin-bottom: 0.3em;
+}
+.start-content[data-mode="resume"] .subtitle {
+  margin-bottom: 1.5em;
+  font-size: 1em;
+  color: #b8b0a0;
 }
 .start-overlay.hidden {
   opacity: 0;

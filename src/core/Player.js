@@ -12,6 +12,7 @@ export class Player {
   constructor(camera, domElement) {
     this.camera = camera;
     this.controls = new PointerLockControls(camera, domElement);
+    this.controls.pointerSpeed = 0.6;  // sanftere Mausbewegung (Default = 1.0)
     this.getColliders = () => []; // wird vom Game gesetzt
     this.paused = false;          // Game setzt true wenn UI blockiert
 
