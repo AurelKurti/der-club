@@ -164,6 +164,7 @@ export class EvidenceHunt extends BaseMiniGame {
       </div>
     `;
     this.bodyEl.querySelector('.minigame-continue').addEventListener('click', () => {
+      this._requestLock();
       this.end('won');
     });
   }

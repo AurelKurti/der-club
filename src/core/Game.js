@@ -55,7 +55,7 @@ export class Game {
   _initUI() {
     this.audio = new AudioManager();
     this.save = new SaveManager();
-    this.dialog = new Dialog(this.audio);
+    this.dialog = new Dialog(this.audio, this.player);
     this.inventory = new Inventory(this.audio, this.save);
     this.diary = new Diary(this.save);
     this.toast = new Toast();

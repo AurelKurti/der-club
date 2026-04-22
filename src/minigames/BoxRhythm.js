@@ -165,6 +165,7 @@ export class BoxRhythm extends BaseMiniGame {
       </div>
     `;
     this.bodyEl.querySelector('.minigame-continue').addEventListener('click', () => {
+      this._requestLock();   // Lock in Click-Gesture
       this.end('won');
     });
   }

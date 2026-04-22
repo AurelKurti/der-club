@@ -8,8 +8,9 @@
  * Promise resolved wenn alle Zeilen durch sind.
  */
 export class Dialog {
-  constructor(audio = null) {
+  constructor(audio = null, player = null) {
     this.audio = audio;
+    this.player = player;
     this.el = document.createElement('div');
     this.el.className = 'dialog-box hidden';
     this.el.innerHTML = `
@@ -74,18 +75,21 @@ export class Dialog {
 
   _advance() {
     this.audio?.uiClick();
+    const isLast = this._index >= this._lines.length - 1;
+
+    // WICHTIG: requestPointerLock SYNCHRON in der Gesture vor dem hide()
+    // damit Browser den Lock nicht verwirft.
+    if (isLast && this.player && !this.player.isLocked()) {
+      try { this.player.lock(); } catch { /* ignore */ }
+    }
+
     this._index++;
     if (this._index >= this._lines.length) {
       this.hide();
       const resolve = this._resolve;
       this._resolve = null;
       if (resolve) resolve();
-      // Versuche Pointer-Lock direkt aus dem Keydown/Click-Gesture zurückzuholen
-      // (Browser-Security: requestPointerLock braucht User-Gesture-Kontext)
-      if (!document.pointerLockElement) {
-        try { document.body.requestPointerLock(); } catch { /* ignore */ }
-      }
-      // Fallback: wenn Lock nicht klappte, greift onClose → resumeIfIdle
+      // Fallback: falls Lock nicht klappte, greift onClose → resumeIfIdle → StartOverlay
       queueMicrotask(() => this.onClose?.());
     } else {
       this._render();

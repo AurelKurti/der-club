@@ -41,7 +41,17 @@ export class BaseMiniGame {
     this.hintEl = this.overlay.querySelector('.minigame-hint');
     this.skipBtn = this.overlay.querySelector('.minigame-skip');
 
-    this.skipBtn.addEventListener('click', () => this.end('skipped'));
+    // WICHTIG: Lock SYNCHRON in der Click-Gesture vor end() → Browser akzeptiert
+    this.skipBtn.addEventListener('click', () => {
+      this._requestLock();
+      this.end('skipped');
+    });
+  }
+
+  /** Synchrone Lock-Anfrage — MUSS innerhalb eines Click-/Keydown-Gestures laufen. */
+  _requestLock() {
+    if (document.pointerLockElement) return;
+    try { this.ctx.player?.lock?.(); } catch { /* ignore */ }
   }
 
   setTitle(t)  { this.titleEl.textContent = t; }
