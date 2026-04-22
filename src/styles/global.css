@@ -30,10 +30,12 @@ html, body {
   z-index: 10;
 }
 
-/* Direkte Kinder von ui-root empfangen Klicks — aber wenn sie .hidden haben
-   NICHT. `display: none` kommt via .hidden und entfernt das Element vom
-   Layout (inkl. pointer-events). */
-#ui-root > *:not(.hidden) {
+/* Direkte Kinder von ui-root empfangen Klicks — aber NICHT:
+   - wenn .hidden (display: none via Klasse)
+   - wenn .fade-overlay (Raum-Wechsel-Overlay, steuert seine eigene
+     pointer-events via .active-Klasse)
+   Sonst würden unsichtbare Overlays Klicks abfangen und Spiel blockieren. */
+#ui-root > *:not(.hidden):not(.fade-overlay) {
   pointer-events: auto;
 }
 
@@ -274,13 +276,15 @@ html, body {
   border-color: #e8e4dc;
 }
 
-/* ==== Fade Overlay (Raum-Übergang) ==== */
+/* ==== Fade Overlay (Raum-Übergang) ====
+   WICHTIG: pointer-events standardmässig 'none' via hohe Spezifität
+   (sonst gewinnt #ui-root > *). Nur während .active blockt es Klicks. */
 .fade-overlay {
   position: fixed;
   inset: 0;
   background: #000;
   opacity: 0;
-  pointer-events: none;
+  pointer-events: none !important;
   z-index: 50;
   transition: opacity 500ms ease;
   display: flex;
@@ -289,7 +293,7 @@ html, body {
 }
 .fade-overlay.active {
   opacity: 1;
-  pointer-events: auto;
+  pointer-events: auto !important;
 }
 .transition-text {
   font-family: 'Cormorant Garamond', Georgia, serif;
