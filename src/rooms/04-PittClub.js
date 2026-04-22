@@ -176,10 +176,11 @@ export class PittClub extends BaseRoom {
   }
 
   _buildLighting(scene) {
-    scene.add(new THREE.AmbientLight(0x202830, 0.18));
+    scene.add(new THREE.AmbientLight(0x303840, 0.35));
+    scene.add(new THREE.HemisphereLight(0x8898b8, 0x202028, 0.2));
 
     // Kaltes Mondlicht
-    const moon = new THREE.DirectionalLight(0x8898b8, 0.4);
+    const moon = new THREE.DirectionalLight(0x8898b8, 0.8);
     moon.position.set(-5, 12, 8);
     moon.castShadow = true;
     moon.shadow.mapSize.width = 1024;
@@ -191,7 +192,7 @@ export class PittClub extends BaseRoom {
     scene.add(moon);
 
     // Fassaden-Spot (als würde Laterne darauf scheinen)
-    const spot = new THREE.SpotLight(0xffe0b0, 1.2, 20, Math.PI / 4, 0.5);
+    const spot = new THREE.SpotLight(0xffe0b0, 2.5, 25, Math.PI / 4, 0.5);
     spot.position.set(0, 10, 6);
     spot.target.position.set(0, 3, -3);
     scene.add(spot);
@@ -276,7 +277,7 @@ export class PittClub extends BaseRoom {
       this.removeInteractable(trigger);
       scene.remove(marker);
       if (this._silhouettes[0]) {
-        this._silhouettes[0].material.color.setHex(0x3a2818);
+        this._silhouettes[0].material.color.setHex(0x5a4028);
       }
       this.ctx.objective.set('Sprich mit Angus Farewell vor der Tür.');
     }, 'Die Säule berühren');

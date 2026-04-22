@@ -47,9 +47,10 @@ async function boot() {
   function setExit(room, nextId, transitionKey) {
     room.onExit = async () => {
       if (!nextId) {
-        await game.dialog.show('[Demo-Ende. Raum 7-8 werden im nächsten Schritt ergänzt.]');
+        // Gardasee endet normalerweise via Credits-Overlay — dies ist nur ein Fallback.
         return;
       }
+      game.audio?.door?.();
       const next = makeRoom[nextId]();
       wireExit(next, nextId);
       await game.enterRoom(next, transitions[transitionKey]);
@@ -156,7 +157,6 @@ async function boot() {
     });
   }
 
-  console.log('[Der Club] Räume 1-4 verlinkt.');
 }
 
 boot();

@@ -110,6 +110,10 @@ export class BoxFight extends BaseMiniGame {
     if (this._ended) return;
     this.round++;
     this.roundN.textContent = this.round;
+    // HP pro Runde resetten — sonst bleibt der Balken vom Vorrunden-Schaden stehen.
+    this.hp = 100;
+    this.oppHp = 100;
+    this._updateHp();
     this._roundStart = performance.now();
     this._scheduleNextAttack();
     this._showFeedback(`Runde ${this.round} — Gong!`, 'info');

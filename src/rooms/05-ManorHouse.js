@@ -25,7 +25,7 @@ export class ManorHouse extends BaseRoom {
   build() {
     const { scene } = this;
     scene.background = new THREE.Color(0x0a0c0e);
-    scene.fog = new THREE.FogExp2(0x0a0c0e, 0.05);
+    scene.fog = new THREE.FogExp2(0x0a0c0e, 0.025);
 
     this._buildFloor(scene);
     this._buildWalls(scene);
@@ -269,10 +269,11 @@ export class ManorHouse extends BaseRoom {
   }
 
   _buildLighting(scene) {
-    scene.add(new THREE.AmbientLight(0x203040, 0.1));
+    scene.add(new THREE.AmbientLight(0x304058, 0.35));
+    scene.add(new THREE.HemisphereLight(0x9cb0cc, 0x202024, 0.2));
 
     // Kaltes Mondlicht
-    const moon = new THREE.DirectionalLight(0x9cb0cc, 0.25);
+    const moon = new THREE.DirectionalLight(0x9cb0cc, 0.8);
     moon.position.set(5, 10, 5);
     scene.add(moon);
   }

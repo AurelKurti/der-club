@@ -298,17 +298,18 @@ export class AlexBuero extends BaseRoom {
   }
 
   _buildLighting(scene) {
-    scene.add(new THREE.AmbientLight(0x201810, 0.15));
+    scene.add(new THREE.AmbientLight(0x402e1e, 0.4));
+    scene.add(new THREE.HemisphereLight(0xffd8b0, 0x202020, 0.2));
 
     // Kaltes Tageslicht durchs Fenster
-    const window = new THREE.DirectionalLight(0x8898a8, 0.5);
+    const window = new THREE.DirectionalLight(0x8898a8, 0.8);
     window.position.set(6, 3, -2);
     window.target.position.set(0, 1, -2);
     scene.add(window);
     scene.add(window.target);
 
     // Warme Schreibtischlampe
-    const deskLamp = new THREE.PointLight(0xffbf80, 0.8, 4);
+    const deskLamp = new THREE.PointLight(0xffbf80, 1.5, 5);
     deskLamp.position.set(0.6, 1.4, -2.3);
     scene.add(deskLamp);
   }

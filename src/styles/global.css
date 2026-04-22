@@ -50,6 +50,18 @@ html, body {
   background: rgba(255, 255, 255, 0.6);
   border-radius: 50%;
   pointer-events: none;
+  transition: opacity 150ms;
+}
+/* Crosshair verstecken wenn irgendein blockierendes Overlay offen ist */
+body:has(.dialog-box:not(.hidden)) .crosshair,
+body:has(.minigame-overlay:not(.hidden)) .crosshair,
+body:has(.start-overlay:not(.hidden)) .crosshair,
+body:has(.continue-prompt:not(.hidden)) .crosshair,
+body:has(.diary-overlay:not(.hidden)) .crosshair,
+body:has(.credits-overlay) .crosshair,
+body:has(.trigger-warning:not(.hidden)) .crosshair,
+body:has(.intro-screen:not(.hidden)) .crosshair {
+  opacity: 0;
 }
 
 /* ==== HUD Keyboard-Hint (dezent, immer sichtbar) ==== */
@@ -65,6 +77,16 @@ html, body {
   pointer-events: none;
   letter-spacing: 0.03em;
   transition: opacity 300ms ease;
+}
+body:has(.dialog-box:not(.hidden)) .hud-hint,
+body:has(.minigame-overlay:not(.hidden)) .hud-hint,
+body:has(.start-overlay:not(.hidden)) .hud-hint,
+body:has(.continue-prompt:not(.hidden)) .hud-hint,
+body:has(.diary-overlay:not(.hidden)) .hud-hint,
+body:has(.credits-overlay) .hud-hint,
+body:has(.trigger-warning:not(.hidden)) .hud-hint,
+body:has(.intro-screen:not(.hidden)) .hud-hint {
+  opacity: 0;
 }
 
 /* ==== Objective Tracker (oben mittig, persistent) ==== */

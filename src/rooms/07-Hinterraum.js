@@ -21,7 +21,9 @@ export class Hinterraum extends BaseRoom {
     super(ctx);
     this.id = 'hinterraum';
     this.name = 'Pitt Club — Hinterraum';
-    this.spawnPoint.set(0, 1.6, 8);
+    // Spawn MUSS innerhalb der Wände liegen (Wände bei z=±7).
+    // Früher stand hier z=8 → Spieler spawnte HINTER der Wand.
+    this.spawnPoint.set(0, 1.6, 6);
     this.ambientProfile = 'backroom';
     this.floorMaterial = 'carpet';
 
@@ -32,7 +34,7 @@ export class Hinterraum extends BaseRoom {
   build() {
     const { scene } = this;
     scene.background = new THREE.Color(0x08060c);
-    scene.fog = new THREE.FogExp2(0x08060c, 0.08);
+    scene.fog = new THREE.FogExp2(0x08060c, 0.04);
 
     this._buildFloor(scene);
     this._buildWalls(scene);
@@ -317,15 +319,16 @@ export class Hinterraum extends BaseRoom {
   }
 
   _buildLighting(scene) {
-    scene.add(new THREE.AmbientLight(0x2a1820, 0.08));
+    scene.add(new THREE.AmbientLight(0x3a2428, 0.25));
+    scene.add(new THREE.HemisphereLight(0xd8a890, 0x202020, 0.15));
 
     // Rosa-dekadente Atmosphäre über Billardtisch
-    const tableLamp = new THREE.PointLight(0xd87840, 0.7, 6);
+    const tableLamp = new THREE.PointLight(0xd87840, 1.2, 8);
     tableLamp.position.set(0, 3, 0);
     scene.add(tableLamp);
 
     // Akzent-Spotlight auf Tür
-    const doorSpot = new THREE.PointLight(0xff8040, 0.4, 8);
+    const doorSpot = new THREE.PointLight(0xff8040, 0.6, 10);
     doorSpot.position.set(0, 2.5, 6);
     scene.add(doorSpot);
   }
@@ -343,12 +346,12 @@ export class Hinterraum extends BaseRoom {
     this._silhouettes.push(josh);
 
     // Zwei weitere regungslose Schmetterlinge an den Seiten
-    const other1 = new Silhouette({ color: 0x101010, height: 1.78, width: 0.6 });
+    const other1 = new Silhouette({ color: 0x2e2420, height: 1.78, width: 0.6 });
     other1.position.set(-4.5, 0.89, 0);
     scene.add(other1);
     this._silhouettes.push(other1);
 
-    const other2 = new Silhouette({ color: 0x101010, height: 1.82, width: 0.62 });
+    const other2 = new Silhouette({ color: 0x2e2420, height: 1.82, width: 0.62 });
     other2.position.set(4.5, 0.91, 0);
     scene.add(other2);
     this._silhouettes.push(other2);

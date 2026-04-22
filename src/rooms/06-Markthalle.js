@@ -200,7 +200,8 @@ export class Markthalle extends BaseRoom {
   }
 
   _buildLighting(scene) {
-    scene.add(new THREE.AmbientLight(0x1a1410, 0.1));
+    scene.add(new THREE.AmbientLight(0x3a2a20, 0.4));
+    scene.add(new THREE.HemisphereLight(0xffe8c0, 0x202018, 0.2));
 
     // 4 SpotLights über dem Ring (3 hell, 1 tot — Buchdetail)
     const spotPositions = [

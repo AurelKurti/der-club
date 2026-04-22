@@ -87,7 +87,7 @@ export function registerMiliInteraction(room, miliMesh, roomId) {
           { speaker: 'Mili', text: '«Wecker: 7 Uhr.»' },
           { speaker: 'Mili', text: '«Sport: 50 Liegestützen, 30 Dips. Frühstück: Jiaozi mit Instantnudeln.»' },
           { speaker: 'Mili', text: '«Losung des Tages: Der Beste sein.»' },
-          { text: '[Eine Stimme, die nur Hans hört. Seine Schwester Mili — gestorben vor langer Zeit. «永远米利» — Forever Mili.]' }
+          { text: '[Eine Stimme, die nur Hans hört. Seine Schwester Mili — gestorben vor langer Zeit. «永远米利» — Mili für immer.]' }
         ]);
       }, 800);
     }

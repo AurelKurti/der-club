@@ -37,7 +37,10 @@ export class Game {
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.0;
+    this.renderer.toneMappingExposure = 1.4;
+    // Three r155+ defaults to physical lights; legacy-Skalierung matcht unsere
+    // hand-getunten Intensitäten besser (sonst ist alles ~3x zu dunkel).
+    this.renderer.useLegacyLights = true;
   }
 
   _initCamera() {

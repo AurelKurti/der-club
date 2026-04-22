@@ -23,6 +23,10 @@ export class BoxRhythm extends BaseMiniGame {
   }
 
   start() {
+    // Defensiver Reset (falls start() je zweimal aufgerufen würde)
+    this.hits = 0;
+    this.total = 0;
+    this.beats = [];
     this.setTitle('Pater Gerald — Box-Rhythmus');
     this.setHint('A = linke Pratze · D = rechte Pratze · im Rhythmus');
 
