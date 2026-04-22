@@ -36,8 +36,11 @@ export function createStartOverlay(onStart) {
   const btn = el.querySelector('.start-btn');
 
   btn.addEventListener('click', () => {
-    el.classList.add('hidden');
+    // Lock ZUERST in der Click-Gesture — vor jeder DOM-Mutation.
+    // Browser-Activation-Budget wird durch className-Änderungen nicht beeinflusst,
+    // aber zur Sicherheit halten wir die Reihenfolge sauber.
     onStart();
+    el.classList.add('hidden');
   });
 
   const setMode = (mode) => {
