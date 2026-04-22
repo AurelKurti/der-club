@@ -21,6 +21,10 @@ async function boot() {
     uiRoot: document.getElementById('ui-root')
   });
 
+  // Globale Referenz für Debug + automatisierte Playwright-Tests.
+  // Erlaubt z.B. window.__game.startMiniGame(...) aus DevTools heraus.
+  window.__game = game;
+
   // ---- Raum-Kette definieren ----
   const makeRoom = {
     foersterhaus: () => new Foersterhaus(game.sceneManager.ctx),

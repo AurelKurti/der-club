@@ -44,6 +44,8 @@ export class Diary {
     // Nicht öffnen, wenn ein anderes UI aktiv ist — verhindert Overlay-Stacking
     return !!document.querySelector('.start-overlay:not(.hidden)') ||
            !!document.querySelector('.trigger-warning:not(.hidden)') ||
+           !!document.querySelector('.intro-screen:not(.hidden)') ||
+           !!document.querySelector('.continue-prompt:not(.hidden)') ||
            !!document.querySelector('.minigame-overlay') ||
            !!document.querySelector('.dialog-box:not(.hidden)') ||
            !!document.querySelector('.credits-overlay');
