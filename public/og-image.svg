@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="80%">
+      <stop offset="0%" stop-color="#2a1e14"/>
+      <stop offset="100%" stop-color="#08060a"/>
+    </radialGradient>
+    <radialGradient id="wing" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#d8b878"/>
+      <stop offset="100%" stop-color="#5a4020"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g transform="translate(600 260)">
+    <rect x="-3" y="-60" width="6" height="120" fill="#1a0e08"/>
+    <ellipse cx="-60" cy="-30" rx="50" ry="32" fill="url(#wing)" transform="rotate(-12 -60 -30)"/>
+    <ellipse cx="60" cy="-30" rx="50" ry="32" fill="url(#wing)" transform="rotate(12 60 -30)"/>
+    <ellipse cx="-48" cy="30" rx="38" ry="24" fill="#5a4020" transform="rotate(-8 -48 30)"/>
+    <ellipse cx="48" cy="30" rx="38" ry="24" fill="#5a4020" transform="rotate(8 48 30)"/>
+  </g>
+  <text x="600" y="460" font-family="Cormorant Garamond, Georgia, serif" font-size="92" fill="#d8b878" text-anchor="middle" font-weight="300">Der Club</text>
+  <text x="600" y="510" font-family="Inter, sans-serif" font-size="22" fill="#8a8a8a" text-anchor="middle" font-style="italic">Eine interaktive Zusammenfassung · nach Takis Würger</text>
+</svg>
