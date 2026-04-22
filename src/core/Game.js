@@ -50,9 +50,11 @@ export class Game {
   }
 
   _initPlayer() {
-    // WICHTIG: Canvas als Pointer-Lock-Target (nicht document.body),
-    // damit PointerLockControls.isLocked korrekt reflektiert wird.
-    this.player = new Player(this.camera, this.canvas);
+    // WICHTIG: document.body als Pointer-Lock-Target.
+    // Canvas als Target führte zu Chromium-Fehler:
+    // "The root document of this element is not valid for pointer lock."
+    // Three.js-Examples nutzen ebenfalls document.body.
+    this.player = new Player(this.camera, document.body);
   }
 
   _initUI() {
