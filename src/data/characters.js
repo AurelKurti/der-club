@@ -54,6 +54,7 @@ export const CHAR = {
       { speaker: 'Alex', text: '«Vor vierzig Jahren haben sie etwas getan, das ich nie verwunden habe. Mehr musst du jetzt nicht wissen.»' },
       { text: 'Pause. Sie atmet laut ein.' },
       { speaker: 'Alex', text: '«Ich will Charlotte nicht verlieren wie mich selbst.»' },
+      { speaker: 'Alex', text: '«Ich habe Josh letzte Woche am Hinterausgang abgepasst. Zwanzig Schläge. Er hat mich nicht erkannt.»' },
       { speaker: 'Alex', text: '«Was den Menschen vom Pavian unterscheidet, ist nicht die Würde. Es ist die Rache.»' }
     ]
   },
@@ -63,9 +64,10 @@ export const CHAR = {
     color: 0xd0a898,
     tint: 0xd88878,
     somerset: [
-      { speaker: 'Charlotte', text: '«Meine Mutter ist an einer Nervenkrankheit gestorben, als ich fünfzehn war.»' },
-      { speaker: 'Charlotte', text: '«Sie schickte mich nach East London, um Werbeprospekte auszutragen. Sie wollte, dass ich geerdet bin.»' },
-      { text: 'Ich gab ihr die rotgoldene Kette meiner Mutter.' }
+      { speaker: 'Charlotte', text: '«Vor ein paar Wochen hast du mit mir Tango getanzt. Du hast die Schritte der Frau getanzt, weisst du noch?»' },
+      { speaker: 'Charlotte', text: '«Meine Mutter starb an einer Nervenkrankheit, als ich fünfzehn war. Sie schickte mich nach East London, um Werbeprospekte auszutragen.»' },
+      { speaker: 'Charlotte', text: '«Sie wollte, dass ich geerdet bin. Ich habe sie nie gefragt, wozu.»' },
+      { text: 'Ich hörte ihr zu und dachte an die Kette meiner Mutter in meiner Tasche.' }
     ]
   },
 
@@ -75,7 +77,7 @@ export const CHAR = {
     pittclub: [
       { speaker: 'Angus Farewell', text: '«Ich habe dich vorgeschlagen, Hans.»' },
       { speaker: 'Angus Farewell', text: '«Du gehörst jetzt dazu.»' },
-      { text: 'Er legte mir die Fliege um den Hals. Die Männer riefen: «Stickler!»' }
+      { text: 'Er legte mir die Fliege um den Hals. In der Innenseite: ein gelber Schmetterling, den ich erst viel später verstehen würde. Die Männer riefen: «Stickler!»' }
     ]
   },
 
@@ -83,7 +85,8 @@ export const CHAR = {
     profile: 'josh',
     color: 0x9a9a9a,
     pittclub: [
-      { speaker: 'Josh', text: '«Komm mit nach hinten, Bruder. Das ist unsere Nacht.»' }
+      { speaker: 'Josh', text: '«Komm nach hinten, brother. Heute bekommst du alles.»' },
+      { speaker: 'Josh', text: '«La nuit tous les chats sont gris. Immer wieder ein geiler Spruch.»' }
     ]
   },
 
@@ -92,7 +95,7 @@ export const CHAR = {
     color: 0xa07048,
     ring: [
       { speaker: 'Billy', text: '«Bringt dir Glück.»' },
-      { text: 'Er reichte mir eine handpolierte Kastanie.' }
+      { text: 'Er reichte mir eine handpolierte Kastanie und lächelte, als wüsste er, dass ich log.' }
     ]
   },
 
@@ -113,8 +116,9 @@ export const CHAR = {
     halle: [
       // Aus dem Buch Kap. 35: Mike summt vor dem Kampf Wagner und sagt
       // den berühmten Satz über das Team - hier leicht verdichtet.
-      { text: 'Magic Mike summt eine Arie. Wagner, erkenne ich.' },
-      { speaker: 'Magic Mike', text: '«Priest ein Verbrecher. Josh ein Psycho. Billy ein Homo. Und du, Stichler, ein Deutscher. Was für ein Team.»' }
+      { text: 'Magic Mike summt Wagner in sein Handtuch.' },
+      { speaker: 'Magic Mike', text: '«Priest, ein Verbrecher. Josh, ein Psycho. Billy, ein Homo. Du, Stichler, ein Deutscher.»' },
+      { speaker: 'Magic Mike', text: '«Gott hat mir dieses Team als Prüfung gegeben.»' }
     ]
   }
 };

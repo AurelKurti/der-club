@@ -196,15 +196,15 @@ export class InternatKeller extends BaseRoom {
       // Kontext: warum Hans hier ist (Buch Kap. 5). Ohne das wirkt der
       // Keller wie eine beliebige Trainingshalle.
       await this.ctx.dialog.show([
-        { text: 'Ich hatte einen Mitschüler im Esssaal niedergeschlagen. Zur Strafe wurde ich in den Weinkeller geschickt, zu Pater Gerald.' }
+        { text: 'Ein Schlag im Esssaal, ein Geräusch wie das Öffnen eines Marmeladenglases. Dafür der Keller, dafür Pater Gerald.' }
       ]);
       await this.ctx.dialog.show(CHAR.paterGerald.keller);
       this.ctx.save.addDiaryEntry({
         room: this.id,
         title: 'Johannes-Kolleg, Winter',
-        text: 'Zur Strafe für die Schlägerei im Esssaal schickten sie mich in den Weinkeller. Dort trainiert mich Pater Gerald heimlich. Er war Boxer. Er sagt, ich solle das Gegenteil von dem tun, was mein Gegner erwartet.'
+        text: 'Im Weinkeller riechen die Flaschen nach Staub und Eisen. Pater Gerald trägt einen schwarzen Talar, den er zum Trainieren nicht auszieht. Er spricht wenig. «Tu das Gegenteil von dem, was dein Gegner erwartet.» Sonst nichts. Das reicht.'
       });
-      this.ctx.objective.set('Klicke auf die Box-Pratzen für das Training.');
+      this.ctx.objective.set('Finde deinen Rhythmus an Pater Geralds Pratzen.');
     }, 'Pater Gerald');
   }
 
@@ -254,7 +254,7 @@ export class InternatKeller extends BaseRoom {
       // Ausgang aktivieren
       if (this._exitBeam) this._exitBeam.visible = true;
       if (this._exitCone) this._exitCone.visible = true;
-      this.ctx.objective.done('Training abgeschlossen', 'Folge dem goldenen Licht zur Tür.');
+      this.ctx.objective.done('Training abgeschlossen', 'Zurück ins Licht. Alex hat geschrieben.');
     }, this._minigameDone ? 'Pratzen' : 'Box-Training starten');
   }
 

@@ -42,7 +42,7 @@ export class Gardasee extends BaseRoom {
     this._miliRef = addMili(scene, new THREE.Vector3(5, 0.5, -0.8), this.id, this.ctx);
     registerMiliInteraction(this, this._miliRef, this.id);
 
-    this.ctx.objective.set('Lies die Zeitung, drehe das Foto um, sprich mit Charlotte.');
+    this.ctx.objective.set('Die Zeitung. Das Foto. Charlotte. In welcher Reihenfolge du willst.');
   }
 
   _buildProps(scene) {
@@ -282,12 +282,11 @@ export class Gardasee extends BaseRoom {
       if (this._paperRead) return;
       this._paperRead = true;
       await this.ctx.dialog.show([
-        { speaker: 'Schlagzeile', text: 'Skandal in Cambridge -  Pitt-Club-Mitglied Josh Levan in Familienvilla erschossen.' },
-        { text: 'Der Täter: Angus Farewell, Investmentbanker, Vater der Opfer-Tochter. Er richtete die Waffe danach gegen sich selbst.' },
-        { text: 'Aus dem Artikel:' },
-        { text: '«Ermittler fanden im Nachlass Farewells ein altes Familienfoto mit der handschriftlichen Notiz: "Es ist alles wahr."»' },
-        { text: '«Die Enthüllung der "Schmetterlinge" geht zurück auf eine Cambridge-Kunsthistorikerin, deren eigenes Missbrauchs-Trauma von vor 40 Jahren auf denselben Billardtisch führt. Farewell war damals Mitglied -  und ihr Täter.»' },
-        { text: 'Alex hat ihre Rache.' }
+        { speaker: 'Schlagzeile', text: 'Skandal in Cambridge - Pitt-Club-Mitglied Josh Levan in Familienvilla erschossen.' },
+        { text: 'Der Täter: Angus Farewell, Investmentbanker. Er tötete Josh Levan im Schlaf und richtete die Waffe danach gegen sich selbst.' },
+        { text: 'Charlotte hatte Postkarten aus Verona geschrieben. Auf einer stand: «Die Person, die mir das angetan hat, heisst Josh Levan.»' },
+        { text: 'Sie wusste, was ihr Vater tun würde.' },
+        { text: 'Und Alex wusste seit vierzig Jahren, dass er es tun würde.' }
       ]);
       this._maybeTriggerEnd();
     }, 'Die Zeitung lesen');
@@ -296,8 +295,9 @@ export class Gardasee extends BaseRoom {
       if (this._photoRead) return;
       this._photoRead = true;
       await this.ctx.dialog.show([
-        { text: 'Auf der Rückseite des Fotos stand in Angus\' Handschrift ein einziger Satz:' },
-        { speaker: 'Angus (letzte Worte)', text: '«Es ist alles wahr.»' }
+        { text: 'Ich drehte das Foto um. Angus, eine junge Frau, ein blondes Kind auf ihren Knien.' },
+        { text: 'Darunter seine Handschrift, vier Worte wie ein Gebet:' },
+        { text: '«Es ist alles wahr.»' }
       ]);
       this._maybeTriggerEnd();
     }, 'Das Foto umdrehen');
@@ -336,6 +336,8 @@ export class Gardasee extends BaseRoom {
       if (this._charlotteTalked) return;
       this._charlotteTalked = true;
       await this.ctx.dialog.show([
+        { speaker: 'Charlotte', text: '«Hast du Lust zu spielen?»' },
+        { text: 'Ich sagte Nein.' },
         { speaker: 'Charlotte', text: '«Ich schaffe es nur, wenn du bei mir bleibst.»' },
         { text: 'Ich bleibe. Ich werde nie wieder lügen.' }
       ]);
@@ -363,7 +365,7 @@ export class Gardasee extends BaseRoom {
     this.ctx.save.addDiaryEntry({
       room: this.id,
       title: 'Gardasee',
-      text: 'Josh ist tot. Angus hat ihn erschossen und dann sich selbst. Alex hat ihre Rache. Auf der Rückseite eines Fotos stand seine letzte Schrift: «Es ist alles wahr.» Ich werde nie wieder lügen.'
+      text: 'Josh ist tot. Angus hat ihn im Schlaf erschossen und dann sich selbst, den Lauf zwischen den Zähnen, mit dem grossen Zeh am Abzug. Charlotte schwimmt jeden Morgen hinaus und kommt zurück. Ich werde nie wieder lügen. Auf der Rückseite eines Fotos stand in seiner Schrift: «Es ist alles wahr.»'
     });
 
     const credits = document.createElement('div');
@@ -372,8 +374,8 @@ export class Gardasee extends BaseRoom {
       <div class="credits-content">
         <h1>Der Club</h1>
         <p class="epilogue">
-          «Es gibt keine Gerechtigkeit. Es gibt nur Geschichten, die wir uns
-          erzählen, bis sie wahr werden.»
+          «Die Wahrheit sind die Geschichten, die wir uns so lange erzählen,
+          bis wir glauben, sie wären Wirklichkeit.»
         </p>
         <hr>
         <p class="credit-line">Nach dem Roman <em>Der Club</em> von <strong>Takis Würger</strong></p>

@@ -50,7 +50,7 @@ export class Hinterraum extends BaseRoom {
     this._miliRef = addMili(scene, new THREE.Vector3(5, 0.3, -3), this.id, this.ctx);
     registerMiliInteraction(this, this._miliRef, this.id);
 
-    this.ctx.objective.set('Umkreise den Billardtisch -  sammle Beweise.');
+    this.ctx.objective.set('Umkreise den Tisch. Du wirst sehen, was du siehst.');
   }
 
   _buildProps(scene) {
@@ -384,7 +384,8 @@ export class Hinterraum extends BaseRoom {
       joshTalked = true;
       await this.ctx.dialog.show(CHAR.josh.pittclub);
       await this.ctx.dialog.show([
-        { text: 'Ich ging um den Tisch. Ich sah den Schmetterling im Glaskasten.' }
+        { text: 'Ich ging um den Tisch. Ich sah den Schmetterling im Glaskasten.' },
+        { text: 'Ich dachte: «Was der Mensch in seinem Kern ist: ein Raubtier.»' }
       ]);
     }, 'Josh');
   }
@@ -416,7 +417,7 @@ export class Hinterraum extends BaseRoom {
       this.ctx.save.addDiaryEntry({
         room: this.id,
         title: 'Pitt Club, Hinterzimmer',
-        text: 'Ich sah den Schmetterling im Glaskasten. Ornithoptera goliath. Derselbe wie auf meiner Fliege. Derselbe wie auf dem Brief an Charlotte. Ich hob Lucia hoch und trug sie hinaus. Es gab kein Grau. Ich hatte mich entschieden.'
+        text: 'Ornithoptera goliath. Derselbe Schmetterling wie in meiner Fliege. Derselbe wie auf Charlottes Brief. Ich hob Lucia hoch und trug sie hinaus. Es gab kein Grau. Ich hatte Billy schon verloren, bevor ich diesen Raum betrat, und wusste es erst jetzt.'
       });
 
       await this.ctx.dialog.show([
@@ -430,11 +431,11 @@ export class Hinterraum extends BaseRoom {
       await this.ctx.dialog.show([
         { text: 'Ich spürte Billys Kastanie in meiner Tasche. Dann sah ich den gelben Schmetterling im Glaskasten.' },
         { text: 'Das Zeichen in der Fliege. Das Zeichen auf dem Siegel. Das Zeichen hier.' },
-        { text: 'Es war nie einzeln. Es war ein Ring, der seit Jahrzehnten bestand.' }
+        { text: 'Vierzig Jahre. So lange trug einer nach dem anderen diese Fliege. So lange hat niemand etwas gesagt.' }
       ]);
 
       if (this._exitCone) this._exitCone.visible = true;
-      this.ctx.objective.done('Lucia gerettet', 'Verlasse den Hinterraum durch den Vorhang.');
+      this.ctx.objective.done('Lucia gerettet', 'Raus. So schnell du kannst.');
     }, 'Den Tisch umkreisen');
 
     // Ausgang (Vorhang am Südende)

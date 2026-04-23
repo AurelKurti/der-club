@@ -43,7 +43,7 @@ export class ManorHouse extends BaseRoom {
     this._miliRef = addMili(scene, new THREE.Vector3(-4, 1.7, 4), this.id, this.ctx);
     registerMiliInteraction(this, this._miliRef, this.id);
 
-    this.ctx.objective.set('Sprich mit Charlotte an den Schlafsäcken.');
+    this.ctx.objective.set('Charlotte wartet. Draussen ist Nebel, drinnen nur sie.');
   }
 
   _buildCharlotteTraumaEvidence(scene) {
@@ -89,7 +89,7 @@ export class ManorHouse extends BaseRoom {
       this.ctx.save.addDiaryEntry({
         room: this.id,
         title: 'Charlottes Brief',
-        text: 'Ich habe den Brief mit dem gelben Schmetterling-Siegel gesehen. Und das Arztgutachten daneben. Sie hat es vier Jahre mit sich getragen. Allein.'
+        text: 'Vier Jahre ein Brief in einer Schublade. Vier Jahre ein Arztbericht. Sie hat nie einen Namen genannt. Ich habe auch keinen genannt. Wir schliefen in zwei Schlafsäcken und froren.'
       });
     }, 'Brief mit Wachssiegel');
   }
@@ -196,8 +196,8 @@ export class ManorHouse extends BaseRoom {
 
     this.addInteractable(body, async () => {
       await this.ctx.dialog.show([
-        { text: 'Eine alte Standuhr -  ohne Zeiger.' },
-        { text: 'Zeit bedeutet hier nichts.' }
+        { text: 'Eine Standuhr ohne Zeiger.' },
+        { text: 'In diesem Haus läuft keine Zeit mehr.' }
       ]);
     }, 'Standuhr');
   }
@@ -304,10 +304,10 @@ export class ManorHouse extends BaseRoom {
       this.ctx.save.addDiaryEntry({
         room: this.id,
         title: 'Manor House, Somerset',
-        text: 'Charlotte und ich schliefen auf dem Boden in zwei Daunenschlafsäcken. Sie erzählte mir vom Tod ihrer Mutter. Ich trug die rotgoldene Kette meiner Mutter in der Tasche - bereit, sie ihr zu geben.'
+        text: 'Nebel auf den Feldern. Die Standuhr an der Wand hat keine Zeiger. In der Nacht hat Charlotte mir vom Tod ihrer Mutter erzählt, und ich habe sie nur angesehen. Die Kette meiner Mutter lag in meiner Tasche wie ein Stein.'
       });
       if (this._exitCone) this._exitCone.visible = true;
-      this.ctx.objective.done('Nacht in Somerset', 'Verlasse das Haus -  der Boxkampf wartet.');
+      this.ctx.objective.done('Nacht in Somerset', 'Geh. Das Haus hält dich nicht.');
     }, 'Charlotte');
   }
 

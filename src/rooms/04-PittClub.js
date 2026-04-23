@@ -37,7 +37,7 @@ export class PittClub extends BaseRoom {
     this._miliRef = addMili(scene, new THREE.Vector3(-6.5, 0.3, 6), this.id, this.ctx);
     registerMiliInteraction(this, this._miliRef, this.id);
 
-    this.ctx.objective.set('Berühre die markierte Säule der Pitt-Club-Fassade.');
+    this.ctx.objective.set('Leg die Hand an eine der Säulen. Manchmal genügt das, um dazuzugehören.');
   }
 
   _buildGround(scene) {
@@ -227,8 +227,8 @@ export class PittClub extends BaseRoom {
       // unbemerkt - die Verbindung zum Geheimnis erkennt Hans erst
       // im Hinterraum (Kap. 46).
       await this.ctx.dialog.show([
-        { speaker: 'Angus', text: '«Charlotte. Pass auf sie auf, Hans. Bitte.»' },
-        { text: 'Ich nickte. Ich wusste noch nicht, was er wirklich war.' }
+        { speaker: 'Angus', text: '«Pass auf Charly auf. Bitte.»' },
+        { text: 'Er sagte «bitte» wie ein Vater, der etwas zu spät sagt.' }
       ]);
       this.ctx.save.addDiaryEntry({
         room: this.id,
@@ -236,7 +236,7 @@ export class PittClub extends BaseRoom {
         text: 'Angus hat mir die Fliege umgebunden. Er bat mich, auf Charlotte aufzupassen, als wäre er ein Vater. Ich gehöre jetzt zu ihnen.'
       });
       if (this._exitCone) this._exitCone.visible = true;
-      this.ctx.objective.done('Aufnahme in den Pitt Club', 'Folge dem goldenen Licht.');
+      this.ctx.objective.done('Aufnahme in den Pitt Club', 'Geh in die Nacht. Jesus Lane schläft nicht.');
     }, 'Angus Farewell');
   }
 
@@ -269,8 +269,8 @@ export class PittClub extends BaseRoom {
       if (touched) return;
       touched = true;
       await this.ctx.dialog.show([
-        { text: 'Die Säule ist kalt unter meiner Hand.' },
-        { text: 'Ich wusste in diesem Moment: ich wollte dazugehören.' }
+        { text: 'Die Säule ist kalt. Kälter als die Luft.' },
+        { text: 'Ich presste die Hand an den Stein und log mich selbst nicht mehr an: ich wollte hinein.' }
       ]);
       this._colonnadeTouched = true;
       this.removeInteractable(trigger);

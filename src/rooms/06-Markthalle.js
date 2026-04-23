@@ -43,7 +43,7 @@ export class Markthalle extends BaseRoom {
     this._miliRef = addMili(scene, new THREE.Vector3(4, 0.3, -12), this.id, this.ctx);
     registerMiliInteraction(this, this._miliRef, this.id);
 
-    this.ctx.objective.set('Steig in den Boxring in der Mitte der Halle.');
+    this.ctx.objective.set('Zieh die Handschuhe an. Es sind noch die von Vater.');
   }
 
   _buildFloor(scene) {
@@ -302,9 +302,9 @@ export class Markthalle extends BaseRoom {
       // Nur wenn Hans die Kette aus Raum 1 noch mit sich trägt.
       if (this.ctx.inventory.has('kette')) {
         await this.ctx.dialog.show([
-          { text: 'Vor dem Kampf stand ich mit Charlotte auf dem Dach der Halle.' },
-          { text: 'Ich sah die Schnittnarben an ihren Unterarmen. Ich nahm die rotgoldene Kette aus meiner Tasche.' },
-          { text: 'Ich legte sie ihr um den Hals. Sie sagte nichts.' }
+          { text: 'Auf dem Dach nieselte es. Charlottes Haare klebten am Hals.' },
+          { text: 'Der Ärmel rutschte ihr hoch. Ein frischer Schnitt, sauber wie eine Zeile.' },
+          { text: 'Ich legte ihr die Kette meiner Mutter um. Sie sagte nichts, und das war das Ehrlichste, was wir je miteinander hatten.' }
         ]);
         this.ctx.inventory.remove?.('kette');
         this.ctx.save.addDiaryEntry({
@@ -314,15 +314,16 @@ export class Markthalle extends BaseRoom {
         });
       }
       await this.ctx.dialog.show([
-        { speaker: 'Trainer Priest', text: '«Drei Runden. Du gehst da rein und kommst als Sieger raus.»' }
+        { speaker: 'Priest', text: '«Denk an alle, die dir jemals unrecht getan haben.»' },
+        { speaker: 'Priest', text: '«Drei Runden. Dann ist es vorbei.»' }
       ]);
       const result = await this.ctx.game.startMiniGame(new BoxFight(this.ctx));
       this._fightDone = true;
 
       await this.ctx.dialog.show([
-        { text: 'Der Ringarzt wischt mir das Blut aus der Nase.' },
-        { text: 'Billy läuft mit der Regenbogenfahne ein und schlägt den Samoaner nieder.' },
-        { text: 'Cambridge gewinnt 5:4.' }
+        { text: 'Der Ringarzt zieht dem Samoaner die Zunge aus dem Hals. Billys Einlauf-Fahne ist Regenbogen.' },
+        { text: 'Mein Blut schmeckt wie Kupfer. Priest nimmt die Fahne über die Schulter und geht.' },
+        { text: 'Cambridge 5:4. Niemand gratuliert mir.' }
       ]);
 
       this.ctx.inventory.add({ id: 'blazer' });
@@ -333,7 +334,7 @@ export class Markthalle extends BaseRoom {
       });
 
       if (this._exitCone) this._exitCone.visible = true;
-      this.ctx.objective.done('Cambridge gewinnt 5:4', 'Verlasse die Halle -  die Schmetterlinge warten.');
+      this.ctx.objective.done('Cambridge gewinnt 5:4', 'Die Halle leert sich. Was du gewonnen hast, wird nicht lange dein bleiben.');
     }, this._fightDone ? 'Ring' : 'In den Ring steigen');
 
     // Ausgang nach Norden (durch Samtvorhang Richtung Süden zurück,

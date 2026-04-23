@@ -68,7 +68,7 @@ export class Foersterhaus extends BaseRoom {
     this._buildMiliPhoto(scene);
 
     // Initiales Ziel setzen
-    this.ctx.objective.set('Erkunde den Garten. Finde die Werkbank deines Vaters.');
+    this.ctx.objective.set('Geh zur Werkbank. Vater wartet mit etwas auf dich.');
   }
 
   _buildMiliPhoto(scene) {
@@ -377,8 +377,8 @@ export class Foersterhaus extends BaseRoom {
       if (this._cherryTalked) return;
       this._cherryTalked = true;
       await this.ctx.dialog.show([
-        { text: 'Der Kirschbaum. Meine Eltern haben ihn gepflanzt, als ich geboren wurde.' },
-        { text: 'Jedes Frühjahr trägt er weisse Blüten.' }
+        { text: 'Der Kirschbaum. Sie haben ihn gepflanzt, als ich geboren wurde.' },
+        { text: 'Jedes Frühjahr weisse Blüten. Mutters Sarg war aus dem gleichen Holz.' }
       ]);
     }, 'Kirschbaum');
 
@@ -477,20 +477,20 @@ export class Foersterhaus extends BaseRoom {
       glovesTaken = true;
       await this.ctx.dialog.show([
         { text: 'Schwere, schwarze Handschuhe aus Rindsleder. Sie duften nach Wachs.' },
-        { speaker: 'Vater', text: '«Stärkere und Schwächere. Merk dir das.»' }
+        { speaker: 'Vater', text: '«Meistens ist alles grau. Aber manchmal gibt es nur Richtig und Falsch.»' }
       ]);
       this.ctx.inventory.add({ id: 'boxhandschuhe' });
       this.ctx.save.addDiaryEntry({
         room: this.id,
-        title: '14. Juli',
-        text: 'Heute hat mir Vater Boxhandschuhe geschenkt. Er sagte, es gebe Richtig und Falsch, und wenn Stärkere Schwächeren Leid antun, sei das falsch.'
+        title: 'Der Tag, an dem mir Vater die Handschuhe gab',
+        text: 'Heute legte Vater zwei schwarze Handschuhe neben meinen Teller. Sie rochen nach Wachs. Er sagte nichts, was er nicht schon im Wald gesagt hatte. Und doch hörte ich es zum ersten Mal.'
       });
       this.removeInteractable(gloves);
       if (this._exitMarker) {
         this._exitMarker.visible = true;
         this._exitBeam.visible = true;
       }
-      this.ctx.objective.done('Boxhandschuhe gefunden', 'Folge dem goldenen Licht -  verlasse den Garten.');
+      this.ctx.objective.done('Boxhandschuhe gefunden', 'Wirf die Handschuhe über die Schulter. Der Wald ruft.');
     }, 'Boxhandschuhe aufheben');
   }
 

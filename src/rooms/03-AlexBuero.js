@@ -46,7 +46,7 @@ export class AlexBuero extends BaseRoom {
     this._miliRef = addMili(scene, new THREE.Vector3(3.5, 2.2, -1), this.id, this.ctx);
     registerMiliInteraction(this, this._miliRef, this.id);
 
-    this.ctx.objective.set('Sprich mit Tante Alex hinter dem Schreibtisch.');
+    this.ctx.objective.set('Alex wartet. Sie hat ein Bild an der Wand, das sie erklären wird.');
   }
 
   _buildFloor(scene) {
@@ -330,16 +330,17 @@ export class AlexBuero extends BaseRoom {
         await this.ctx.dialog.show(CHAR.alex.buero);
         await this.ctx.dialog.show(CHAR.alex.buero_backstory);
         await this.ctx.dialog.show([
-          { speaker: 'Alex', text: '«Hier. Dein Studentenausweis. «Hans Stichler», dein neuer Name. Der alte gehört niemandem mehr.»' }
+          { speaker: 'Alex', text: '«Hier. Hans Stichler. Der Name gehört ab heute dir.»' },
+          { speaker: 'Alex', text: '«Der alte gehört einem Jungen im Deister. Den lassen wir dort.»' }
         ]);
         if (this._ausweis) this._ausweis.visible = true;
         this.ctx.save.addDiaryEntry({
           room: this.id,
           title: 'Alex\' Büro',
-          text: 'Alex hat mir von den Schmetterlingen erzählt. Eine Gruppe im Pitt Club, die Studentinnen drogt. Sie schweigt über ihre eigene Geschichte - vor vierzig Jahren, sagt sie, nicht mehr. Ich soll ihr Werkzeug sein. Ich heisse ab heute Hans Stichler. Im Zimmer nebenan wohnt Peter Wong, Chinese, der jeden Morgen um sieben aufsteht und fünfzig Liegestützen macht. «Losung des Tages: Der Beste sein.»'
+          text: 'Die Schmetterlinge, sagt Alex. Eine Gruppe im Pitt Club. Sie drogen junge Frauen. Ich soll hineingehen, weil sie mich nicht kennen. Über das, was vor vierzig Jahren war, schweigt sie. Ich heisse ab heute Hans Stichler. Der alte Name gehört niemandem mehr.'
         });
         this._firstVisit = false;
-        this.ctx.objective.set('Nimm den Tarn-Ausweis vom Schreibtisch.');
+        this.ctx.objective.set('Der Ausweis liegt auf dem Tisch. Er trägt einen Namen, der ab heute deiner ist.');
       } else {
         await this.ctx.dialog.show([
           { speaker: 'Alex', text: '«Du weisst jetzt genug. Geh.»' }
@@ -354,6 +355,7 @@ export class AlexBuero extends BaseRoom {
       await this.ctx.dialog.show([
         { speaker: 'Alex', text: '«Goya war Anfang 1792 taub geworden. Er zog in eine Villa ausserhalb von Madrid.»' },
         { speaker: 'Alex', text: '«Er malte vierzehn Bilder auf die Wände seines Esszimmers. Eines zeigt Saturn, der seinen Sohn verschlingt.»' },
+        { speaker: 'Alex', text: '«Hinter der dunklen Fläche über seinem Unterleib hatte Goya ihn mit erigiertem Penis gemalt. Dann hat er das übermalt.»' },
         { speaker: 'Alex', text: '«Das ist die Welt, in die ich dich schicke.»' }
       ]);
     }, 'Saturn verschlingt seinen Sohn');
@@ -382,7 +384,7 @@ export class AlexBuero extends BaseRoom {
       this.ctx.inventory.add({ id: 'studentenausweis' });
       this.removeInteractable(card);
       if (this._exitCone) this._exitCone.visible = true;
-      this.ctx.objective.done('Tarn-Ausweis erhalten', 'Verlasse das Büro durch die Tür.');
+      this.ctx.objective.done('Tarn-Ausweis erhalten', 'Geh. Du weisst jetzt zu viel und noch zu wenig.');
     }, 'Ausweis einstecken');
   }
 
