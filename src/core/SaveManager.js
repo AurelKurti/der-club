@@ -24,8 +24,20 @@ export class SaveManager {
       const raw = localStorage.getItem(KEY);
       if (!raw) return this._default();
       const parsed = JSON.parse(raw);
+      if (!parsed || typeof parsed !== 'object') return this._default();
       if (parsed.version !== VERSION) return this._default();
-      return parsed;
+      // Schema-Validation: Manipulation oder Migrations-Reste dürfen nicht
+      // zur Runtime-Exception führen. Pro Feld auf erwarteten Typ prüfen.
+      const def = this._default();
+      const safe = {
+        version: VERSION,
+        currentRoom: typeof parsed.currentRoom === 'string' ? parsed.currentRoom : null,
+        inventory: Array.isArray(parsed.inventory) ? parsed.inventory.filter((x) => typeof x === 'string') : [],
+        diary: Array.isArray(parsed.diary) ? parsed.diary.filter((e) => e && typeof e === 'object') : [],
+        collectibles: Array.isArray(parsed.collectibles) ? parsed.collectibles.filter((x) => typeof x === 'string') : [],
+        flags: (parsed.flags && typeof parsed.flags === 'object') ? parsed.flags : {}
+      };
+      return safe;
     } catch {
       return this._default();
     }

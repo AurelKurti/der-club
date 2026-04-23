@@ -16,6 +16,22 @@ import { createIntroScreen } from './ui/introScreen.js';
 // ==========================================================================
 
 async function boot() {
+  // Touch-only-Geräte können WASD/Pointer-Lock nicht nutzen → freundlicher Hinweis
+  if (('ontouchstart' in window || navigator.maxTouchPoints > 0) && window.innerWidth < 1000) {
+    const notice = document.createElement('div');
+    notice.style.cssText = 'position:fixed;inset:0;background:#0a0808;color:#f4e8d0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Georgia,serif;text-align:center;padding:32px;z-index:9999;';
+    notice.innerHTML = `
+      <h1 style="color:#d8b878;font-size:26px;margin:0 0 16px;">Bitte am Computer öffnen</h1>
+      <p style="opacity:0.85;max-width:420px;line-height:1.5;font-size:15px;">
+        «Der Club» ist ein First-Person-Spiel und braucht Tastatur (WASD) und Maus.
+        Auf Tablet oder Handy ist es leider nicht spielbar.
+      </p>
+      <p style="opacity:0.5;font-size:13px;margin-top:24px;">der-club.vercel.app</p>
+    `;
+    document.body.appendChild(notice);
+    return;
+  }
+
   const game = new Game({
     canvas: document.getElementById('game-canvas'),
     uiRoot: document.getElementById('ui-root')
@@ -163,4 +179,21 @@ async function boot() {
 
 }
 
-boot();
+function showBootError(err) {
+  console.error('[Der Club] Boot fehlgeschlagen:', err);
+  const root = document.getElementById('ui-root') || document.body;
+  const el = document.createElement('div');
+  el.style.cssText = 'position:fixed;inset:0;background:#0a0808;color:#f4e8d0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Georgia,serif;text-align:center;padding:32px;z-index:9999;';
+  el.innerHTML = `
+    <h1 style="color:#d8b878;font-size:28px;margin:0 0 16px;">Das Spiel kann nicht starten</h1>
+    <p style="opacity:0.85;max-width:480px;line-height:1.5;">
+      Dein Browser unterstützt vielleicht kein WebGL, oder etwas ist schief gelaufen.
+      Bitte aktualisiere die Seite (Cmd/Ctrl + R) oder probiere einen aktuellen Chrome / Firefox / Safari.
+    </p>
+    <p style="opacity:0.5;font-size:12px;margin-top:24px;">${err?.message ?? err}</p>
+    <button onclick="location.reload()" style="margin-top:24px;padding:10px 24px;background:#d8b878;border:none;color:#0a0808;font-size:15px;cursor:pointer;border-radius:2px;">Neu laden</button>
+  `;
+  root.appendChild(el);
+}
+
+boot().catch(showBootError);

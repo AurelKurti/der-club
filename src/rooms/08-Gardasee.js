@@ -282,11 +282,11 @@ export class Gardasee extends BaseRoom {
       if (this._paperRead) return;
       this._paperRead = true;
       await this.ctx.dialog.show([
-        { speaker: 'Schlagzeile', text: 'Skandal in Cambridge — Pitt-Club-Mitglied Josh Levan in Familienvilla erschossen.' },
+        { speaker: 'Schlagzeile', text: 'Skandal in Cambridge -  Pitt-Club-Mitglied Josh Levan in Familienvilla erschossen.' },
         { text: 'Der Täter: Angus Farewell, Investmentbanker, Vater der Opfer-Tochter. Er richtete die Waffe danach gegen sich selbst.' },
         { text: 'Aus dem Artikel:' },
         { text: '«Ermittler fanden im Nachlass Farewells ein altes Familienfoto mit der handschriftlichen Notiz: "Es ist alles wahr."»' },
-        { text: '«Die Enthüllung der "Schmetterlinge" geht zurück auf eine Cambridge-Kunsthistorikerin, deren eigenes Missbrauchs-Trauma von vor 40 Jahren auf denselben Billardtisch führt. Farewell war damals Mitglied — und ihr Täter.»' },
+        { text: '«Die Enthüllung der "Schmetterlinge" geht zurück auf eine Cambridge-Kunsthistorikerin, deren eigenes Missbrauchs-Trauma von vor 40 Jahren auf denselben Billardtisch führt. Farewell war damals Mitglied -  und ihr Täter.»' },
         { text: 'Alex hat ihre Rache.' }
       ]);
       this._maybeTriggerEnd();
@@ -310,8 +310,8 @@ export class Gardasee extends BaseRoom {
     const sun = new THREE.DirectionalLight(0xffb070, 1.5);
     sun.position.set(-18, 6, -12);
     sun.castShadow = true;
-    sun.shadow.mapSize.width = 2048;
-    sun.shadow.mapSize.height = 2048;
+    sun.shadow.mapSize.width = 1024;
+    sun.shadow.mapSize.height = 1024;
     sun.shadow.camera.left = -20;
     sun.shadow.camera.right = 20;
     sun.shadow.camera.top = 20;
@@ -378,8 +378,10 @@ export class Gardasee extends BaseRoom {
         <hr>
         <p class="credit-line">Nach dem Roman <em>Der Club</em> von <strong>Takis Würger</strong></p>
         <p class="credit-line-small">Kein &amp; Aber, 2016</p>
-        <p class="credit-section">Ein Schulprojekt</p>
-        <p class="credit-line-small">Assets: Poly Haven · Freesound · OpenGameArt (CC0)</p>
+        <p class="credit-section">Ein Schulprojekt von</p>
+        <p class="credit-line"><strong>Aurel Kurti</strong></p>
+        <p class="credit-line-small">Adaption für den Literatur-Unterricht. Bewusste Vereinfachungen und Verdichtungen - verbindlich ist der Roman.</p>
+        <p class="credit-line-small" style="margin-top:18px;">Assets: prozedural · Sounds: Web Audio API · Engine: Three.js</p>
         <div class="credits-buttons">
           <button class="credits-replay">Noch einmal beginnen</button>
           <button class="credits-diary">Tagebuch öffnen</button>

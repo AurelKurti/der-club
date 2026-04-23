@@ -42,6 +42,9 @@ export class Silhouette extends THREE.Mesh {
     const canvas = _makeCanvas(PROFILES[profile] || PROFILES.default);
     const texture = new THREE.CanvasTexture(canvas);
     texture.colorSpace = THREE.SRGBColorSpace;
+    // Billboards brauchen keine Mipmaps — spart ~33% VRAM pro Silhouette
+    texture.generateMipmaps = false;
+    texture.minFilter = THREE.LinearFilter;
 
     const mat = new THREE.MeshBasicMaterial({
       map: texture,

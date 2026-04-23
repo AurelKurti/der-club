@@ -24,13 +24,18 @@ export class SceneManager {
    * @param {string} transitionText — optional: Zeit-Bridge-Text
    */
   async enterRoom(newRoom, transitionText = null) {
-    if (this.currentRoom) {
-      await this._fadeOut(transitionText);
-      this.currentRoom.dispose();
-    }
+    // Reentrancy-Guard: doppelter onExit-Trigger während der 2.5s-Fade würde
+    // sonst den vorherigen Raum zweimal disposen.
+    if (this._transitioning) return;
+    this._transitioning = true;
+    try {
+      if (this.currentRoom) {
+        await this._fadeOut(transitionText);
+        this.currentRoom.dispose();
+      }
 
-    newRoom.build();
-    this.currentRoom = newRoom;
+      newRoom.build();
+      this.currentRoom = newRoom;
 
     // Player an Spawnpoint setzen + Blickrichtung zurücksetzen (-Z)
     this.ctx.player.position.copy(newRoom.spawnPoint);
@@ -44,10 +49,13 @@ export class SceneManager {
       this.ctx.footsteps.setMaterial(newRoom.floorMaterial || 'stone');
     }
 
-    // Save-Hook
-    this.ctx.save?.setCurrentRoom(newRoom.id);
+      // Save-Hook
+      this.ctx.save?.setCurrentRoom(newRoom.id);
 
-    await this._fadeIn();
+      await this._fadeIn();
+    } finally {
+      this._transitioning = false;
+    }
   }
 
   update(delta) {

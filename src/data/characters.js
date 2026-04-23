@@ -12,7 +12,7 @@ export const CHAR = {
     tint: 0xffe4a0,
     garten: [
       { speaker: 'Mutter', text: '«Ich kenne jedes Kraut in diesem Wald.»' },
-      { text: 'In meiner frühsten Erinnerung läuft meine Mutter mit nackten Füßen durch den Garten auf mich zu. Sie trägt ein gelbes Kleid aus Leinen.' }
+      { text: 'In meiner frühsten Erinnerung läuft meine Mutter mit nackten Füssen durch den Garten auf mich zu. Sie trägt ein gelbes Kleid aus Leinen.' }
     ]
   },
 
@@ -49,7 +49,7 @@ export const CHAR = {
     buero_backstory: [
       { text: 'Alex dreht sich zum Fenster. Regen läuft an der Scheibe herunter.' },
       { speaker: 'Alex', text: '«Ich war achtzehn, als ich hier ankam. Aus Stoke-on-Trent. Meine Mutter hat Porzellan bemalt.»' },
-      { speaker: 'Alex', text: '«Vor vierzig Jahren gab es einen Mann, der war für mich freundlich. Er hieß Angus.»' },
+      { speaker: 'Alex', text: '«Vor vierzig Jahren gab es einen Mann, der war für mich freundlich. Er hiess Angus.»' },
       { speaker: 'Alex', text: '«Er hat mich in den Pitt Club eingeladen. In einen Hinterraum. Auf einen Billardtisch.»' },
       { text: 'Pause. Sie atmet laut ein.' },
       { speaker: 'Alex', text: '«Ich habe es vierzig Jahre niemandem gesagt. Jetzt sag ich es dir, weil ich Charlotte nicht verlieren will wie mich selbst.»' },

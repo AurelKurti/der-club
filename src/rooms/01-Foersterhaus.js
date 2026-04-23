@@ -29,7 +29,7 @@ export class Foersterhaus extends BaseRoom {
           await ctx.dialog.show([
             { text: '[Du bist Hans. Dies ist das Haus deiner Eltern im Deister.]' },
             { text: '[Mit WASD bewegst du dich. Mit der Maus schaust du dich um.]' },
-            { text: '[Nähere dich Objekten oder Figuren — wenn E aufblinkt, kannst du interagieren.]' },
+            { text: '[Nähere dich Objekten oder Figuren -  wenn E aufblinkt, kannst du interagieren.]' },
             { text: '[Mit T öffnest du das Tagebuch. Mit ESC pausierst du.]' }
           ]);
           ctx.save.setFlag('tutorialShown');
@@ -94,13 +94,13 @@ export class Foersterhaus extends BaseRoom {
 
     this.addInteractable(frame, async () => {
       await this.ctx.dialog.show([
-        { text: 'Ein kleines Foto im Silberrahmen. Ein Mädchen mit dunklem Haar, vielleicht sechs Jahre alt.' },
-        { speaker: 'Hans', text: '«Meine Schwester Mili. Sie ist gestorben, als ich klein war. Ich vergesse sie nie.»' }
+        { text: 'Ein kleines Foto im Silberrahmen. Auf der Rückseite zwei chinesische Zeichen: «永远» - für immer.' },
+        { text: 'Eine Widmung, die niemand mehr lesen kann.' }
       ]);
       this.ctx.save.addDiaryEntry({
         room: this.id,
-        title: 'Meine Schwester Mili',
-        text: 'Auf Vaters Werkbank steht ein Foto von Mili. Ich weiss nicht mehr, wie sie klang. Aber ich höre sie manchmal, in den Morgen: «永远» — für immer.'
+        title: 'Die Widmung «永远»',
+        text: 'Auf Vaters Werkbank steht ein Foto. Auf der Rückseite zwei Zeichen: für immer. Ich kenne den Namen Mili, aber nicht das Gesicht.'
       });
     }, 'Foto von Mili');
   }
@@ -305,8 +305,8 @@ export class Foersterhaus extends BaseRoom {
     const sun = new THREE.DirectionalLight(0xffc888, 1.8);
     sun.position.set(-8, 10, 6);
     sun.castShadow = true;
-    sun.shadow.mapSize.width = 2048;
-    sun.shadow.mapSize.height = 2048;
+    sun.shadow.mapSize.width = 1024;
+    sun.shadow.mapSize.height = 1024;
     sun.shadow.camera.near = 0.5;
     sun.shadow.camera.far = 40;
     sun.shadow.camera.left = -20;
@@ -378,7 +378,7 @@ export class Foersterhaus extends BaseRoom {
       this._cherryTalked = true;
       await this.ctx.dialog.show([
         { text: 'Der Kirschbaum. Meine Eltern haben ihn gepflanzt, als ich geboren wurde.' },
-        { text: 'Jedes Frühjahr trägt er weiße Blüten.' }
+        { text: 'Jedes Frühjahr trägt er weisse Blüten.' }
       ]);
     }, 'Kirschbaum');
 
@@ -490,7 +490,7 @@ export class Foersterhaus extends BaseRoom {
         this._exitMarker.visible = true;
         this._exitBeam.visible = true;
       }
-      this.ctx.objective.done('Boxhandschuhe gefunden', 'Folge dem goldenen Licht — verlasse den Garten.');
+      this.ctx.objective.done('Boxhandschuhe gefunden', 'Folge dem goldenen Licht -  verlasse den Garten.');
     }, 'Boxhandschuhe aufheben');
   }
 

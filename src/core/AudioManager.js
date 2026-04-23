@@ -31,6 +31,17 @@ export class AudioManager {
     };
     document.addEventListener('click', unlock);
     document.addEventListener('keydown', unlock);
+
+    // Browser kann den AudioContext bei Tab-Wechsel suspenden — bei Rückkehr
+    // explizit wieder resumen, sonst bleibt das Spiel stumm.
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden && this._ctx?.state === 'suspended') {
+        this._ctx.resume().catch(() => {});
+      }
+    });
+
+    // Cache für Ambient-Buffer — vermeidet 350KB-Allokation pro Raumwechsel
+    this._ambientBufferCache = new Map();
   }
 
   _init() {
@@ -186,18 +197,23 @@ export class AudioManager {
     this.stopAmbient();
     const ctx = this._ctx;
 
-    // 4-Sek-Noise-Buffer, loopbar
-    const bufferSize = ctx.sampleRate * 4;
-    const buffer = ctx.createBuffer(2, bufferSize, ctx.sampleRate);
-    for (let ch = 0; ch < 2; ch++) {
-      const data = buffer.getChannelData(ch);
-      let lastValue = 0;
-      for (let i = 0; i < bufferSize; i++) {
-        // Braun-Rauschen (tiefer gefiltert, wärmer als weiß)
-        const white = Math.random() * 2 - 1;
-        lastValue = (lastValue + white * 0.02) / 1.02;
-        data[i] = lastValue * 3.5;
+    // 4-Sek-Noise-Buffer, loopbar — gecached pro AudioContext (~352KB).
+    // Sonst Allokation bei jedem Raumwechsel.
+    let buffer = this._ambientBufferCache?.get(ctx);
+    if (!buffer) {
+      const bufferSize = ctx.sampleRate * 4;
+      buffer = ctx.createBuffer(2, bufferSize, ctx.sampleRate);
+      for (let ch = 0; ch < 2; ch++) {
+        const data = buffer.getChannelData(ch);
+        let lastValue = 0;
+        for (let i = 0; i < bufferSize; i++) {
+          // Braun-Rauschen (tiefer gefiltert, wärmer als weiss)
+          const white = Math.random() * 2 - 1;
+          lastValue = (lastValue + white * 0.02) / 1.02;
+          data[i] = lastValue * 3.5;
+        }
       }
+      this._ambientBufferCache?.set(ctx, buffer);
     }
 
     const src = ctx.createBufferSource();

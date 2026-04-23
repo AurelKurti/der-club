@@ -2,6 +2,10 @@ import * as THREE from 'three';
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js';
 import { wouldCollide } from './Collision.js';
 
+// Modul-globale Scratch-Vektoren — vermeiden 120 Allokationen/Sek im Player.update.
+const _prevPos = new THREE.Vector3();
+const _afterXPos = new THREE.Vector3();
+
 /**
  * Player — First-Person Kamera + WASD-Bewegung + Kollisions-Abfrage.
  *
@@ -76,8 +80,11 @@ export class Player {
    */
   update(delta) {
     if (this.paused || !this.controls.isLocked) {
-      // Reset damit Spieler nicht nach Unlock weiterschleicht
+      // Reset damit Spieler nicht nach Unlock weiterschleicht — auch
+      // gehaltenes WASD darf den State nicht durch eine Pause überleben.
       this.velocity.set(0, 0, 0);
+      this.moveForward = this.moveBackward = false;
+      this.moveLeft = this.moveRight = false;
       return;
     }
 
@@ -100,19 +107,19 @@ export class Player {
     // Bewegung mit Kollisions-Check: Versuche X und Z getrennt, damit Spieler
     // an Wänden "entlanggleiten" kann statt komplett blockiert zu werden.
     const colliders = this.getColliders();
-    const prevPos = this.camera.position.clone();
+    _prevPos.copy(this.camera.position);
 
     this.controls.moveRight(-this.velocity.x * delta);
     if (wouldCollide(this.camera.position, colliders)) {
-      this.camera.position.x = prevPos.x;
-      this.camera.position.z = prevPos.z;
+      this.camera.position.x = _prevPos.x;
+      this.camera.position.z = _prevPos.z;
     }
 
-    const afterXPos = this.camera.position.clone();
+    _afterXPos.copy(this.camera.position);
     this.controls.moveForward(-this.velocity.z * delta);
     if (wouldCollide(this.camera.position, colliders)) {
-      this.camera.position.x = afterXPos.x;
-      this.camera.position.z = afterXPos.z;
+      this.camera.position.x = _afterXPos.x;
+      this.camera.position.z = _afterXPos.z;
     }
 
     // Kamera bleibt auf Augenhöhe (kein Spring, kein Fallen für jetzt)

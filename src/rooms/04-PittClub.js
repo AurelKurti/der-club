@@ -5,10 +5,9 @@ import { CHAR } from '../data/characters.js';
 import { addMili, registerMiliInteraction } from '../core/Collectible.js';
 
 /**
- * Raum 4 — Pitt Club (Jesus Lane, Cambridge) — STUB
+ * Raum 4 — Pitt Club (Jesus Lane, Cambridge)
  *
  * Quelle: Teil 2, Kap. 16 (Säule) + Kap. 19 (Aufnahme)
- * Stub für Tag 11 — wird mit weiteren Interaktionen in Woche 2 ausgebaut.
  */
 export class PittClub extends BaseRoom {
   constructor(ctx) {
@@ -226,7 +225,7 @@ export class PittClub extends BaseRoom {
       // Zweite Dialog-Szene: väterlicher Angus zeigt Familienfoto (setzt Doppelrolle)
       await this.ctx.dialog.show([
         { text: 'Angus zog ein kleines Lederetui aus der Brusttasche.' },
-        { text: 'Darin: ein verblichenes Foto einer Familie — er, eine blonde Frau, ein kleines Mädchen.' },
+        { text: 'Darin: ein verblichenes Foto einer Familie -  er, eine blonde Frau, ein kleines Mädchen.' },
         { speaker: 'Angus', text: '«Das ist meine Charlotte. Sie ist das Einzige, was mir geblieben ist.»' },
         { speaker: 'Angus', text: '«Pass auf sie auf, Hans. Bitte.»' },
         { text: 'Ich nickte. Ich wusste noch nicht, dass er der Mann war, den Alex vor vierzig Jahren mir gezeigt hatte.' }
@@ -234,7 +233,7 @@ export class PittClub extends BaseRoom {
       this.ctx.save.addDiaryEntry({
         room: this.id,
         title: 'Pitt Club, Nacht',
-        text: 'Angus hat mir die Fliege umgebunden. Innen ein kleiner gelber Schmetterling — das geheime Zeichen. Ich gehöre jetzt zu ihnen. Er bat mich, auf Charlotte aufzupassen, als wäre er ein Vater. Ich spürte Ekel.'
+        text: 'Angus hat mir die Fliege umgebunden. Innen ein kleiner gelber Schmetterling -  das geheime Zeichen. Ich gehöre jetzt zu ihnen. Er bat mich, auf Charlotte aufzupassen, als wäre er ein Vater. Ich spürte Ekel.'
       });
       if (this._exitCone) this._exitCone.visible = true;
       this.ctx.objective.done('Aufnahme in den Pitt Club', 'Folge dem goldenen Licht.');

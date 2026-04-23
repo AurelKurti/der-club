@@ -299,7 +299,7 @@ export class Markthalle extends BaseRoom {
         return;
       }
       await this.ctx.dialog.show([
-        { speaker: 'Priest', text: '«Drei Runden. Du gehst da rein und kommst als Sieger raus.»' }
+        { speaker: 'Trainer Priest', text: '«Drei Runden. Du gehst da rein und kommst als Sieger raus.»' }
       ]);
       const result = await this.ctx.game.startMiniGame(new BoxFight(this.ctx));
       this._fightDone = true;
@@ -318,7 +318,7 @@ export class Markthalle extends BaseRoom {
       });
 
       if (this._exitCone) this._exitCone.visible = true;
-      this.ctx.objective.done('Cambridge gewinnt 5:4', 'Verlasse die Halle — die Schmetterlinge warten.');
+      this.ctx.objective.done('Cambridge gewinnt 5:4', 'Verlasse die Halle -  die Schmetterlinge warten.');
     }, this._fightDone ? 'Ring' : 'In den Ring steigen');
 
     // Ausgang nach Norden (durch Samtvorhang Richtung Süden zurück,

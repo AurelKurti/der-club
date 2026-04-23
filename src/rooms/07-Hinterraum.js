@@ -20,7 +20,7 @@ export class Hinterraum extends BaseRoom {
   constructor(ctx) {
     super(ctx);
     this.id = 'hinterraum';
-    this.name = 'Pitt Club — Hinterraum';
+    this.name = 'Pitt Club -  Hinterraum';
     // Spawn MUSS innerhalb der Wände liegen (Wände bei z=±7).
     // Früher stand hier z=8 → Spieler spawnte HINTER der Wand.
     this.spawnPoint.set(0, 1.6, 6);
@@ -50,7 +50,7 @@ export class Hinterraum extends BaseRoom {
     this._miliRef = addMili(scene, new THREE.Vector3(5, 0.3, -3), this.id, this.ctx);
     registerMiliInteraction(this, this._miliRef, this.id);
 
-    this.ctx.objective.set('Umkreise den Billardtisch — sammle Beweise.');
+    this.ctx.objective.set('Umkreise den Billardtisch -  sammle Beweise.');
   }
 
   _buildProps(scene) {
@@ -378,7 +378,7 @@ export class Hinterraum extends BaseRoom {
     let joshTalked = false;
     this.addInteractable(josh, async () => {
       if (joshTalked) {
-        await this.ctx.dialog.show('Josh grinst dir zu. Er weiss nicht, was er getan hat.');
+        await this.ctx.dialog.show('Josh grinst. Er weiss nicht, was er getan hat.');
         return;
       }
       joshTalked = true;
@@ -426,8 +426,8 @@ export class Hinterraum extends BaseRoom {
 
       // Alex-Echo — ihre Stimme, nicht sichtbar, nach der Rettung
       await this.ctx.dialog.show([
-        { text: 'An der Wand unter dem Billardtisch sah ich eine Inschrift, in die Holzleiste geritzt: «AB — 1986».' },
-        { speaker: 'Alex (in meinem Kopf)', text: '«Ich war einmal an diesem Tisch. Ich habe den ganzen Raum vergessen — ausser dieser Inschrift.»' },
+        { text: 'An der Wand unter dem Billardtisch sah ich eine Inschrift, in die Holzleiste geritzt: «AB -  1986».' },
+        { speaker: 'Alex (in meinem Kopf)', text: '«Ich war einmal an diesem Tisch. Ich habe den ganzen Raum vergessen -  ausser dieser Inschrift.»' },
         { text: 'Dann floh ich nach Hannover.' }
       ]);
 

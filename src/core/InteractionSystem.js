@@ -55,9 +55,13 @@ export class InteractionSystem {
   update() {
     const interactables = this.getInteractables();
 
-    // Vorheriges Hover-Target aus Highlight-Scale zurücksetzen
-    if (this.hovered && this.hovered.mesh && this.hovered.mesh.userData._origScale) {
-      this.hovered.mesh.scale.copy(this.hovered.mesh.userData._origScale);
+    // Vorheriges Hover-Target zurücksetzen: Scale + Emissive
+    if (this.hovered && this.hovered.mesh) {
+      const m = this.hovered.mesh;
+      if (m.userData._origScale) m.scale.copy(m.userData._origScale);
+      if (m.userData._origEmissive !== undefined && m.material?.emissiveIntensity !== undefined) {
+        m.material.emissiveIntensity = m.userData._origEmissive;
+      }
     }
     this.hovered = null;
 
@@ -76,12 +80,18 @@ export class InteractionSystem {
         this.hovered = rootMesh;
         this.hintLabel.textContent = rootMesh.label || 'Interagieren';
         this.hintEl.classList.remove('hidden');
-        // Highlight: 8 % Scale-Up für visuelles Feedback
+        // Highlight: Scale + Emissive-Bump (Scale allein reicht nicht bei
+        // organischen Shapes oder Silhouetten — Emissive-Bump macht es klar).
         if (rootMesh.mesh) {
-          if (!rootMesh.mesh.userData._origScale) {
-            rootMesh.mesh.userData._origScale = rootMesh.mesh.scale.clone();
+          const m = rootMesh.mesh;
+          if (!m.userData._origScale) m.userData._origScale = m.scale.clone();
+          m.scale.copy(m.userData._origScale).multiplyScalar(1.08);
+          if (m.material?.emissiveIntensity !== undefined) {
+            if (m.userData._origEmissive === undefined) {
+              m.userData._origEmissive = m.material.emissiveIntensity;
+            }
+            m.material.emissiveIntensity = m.userData._origEmissive + 0.4;
           }
-          rootMesh.mesh.scale.copy(rootMesh.mesh.userData._origScale).multiplyScalar(1.08);
         }
         return;
       }

@@ -15,7 +15,7 @@ export function createIntroScreen(onDone) {
         Richtig und Falsch. Und wenn Stärkere Schwächeren Leid antun,
         ist das falsch.»
       </div>
-      <div class="intro-attrib">— Takis Würger, <em>Der Club</em></div>
+      <div class="intro-attrib"> -  Takis Würger, <em>Der Club</em></div>
       <button class="intro-btn">Beginnen</button>
     </div>
   `;

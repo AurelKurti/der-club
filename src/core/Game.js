@@ -38,9 +38,8 @@ export class Game {
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.4;
-    // Three r155+ defaults to physical lights; legacy-Skalierung matcht unsere
-    // hand-getunten Intensitäten besser (sonst ist alles ~3x zu dunkel).
-    this.renderer.useLegacyLights = true;
+    // Hinweis: useLegacyLights wurde in Three r165+ entfernt. Unsere Intensitäten
+    // sind bereits für physical-correct Mode getunt (siehe Lighting-Audit).
   }
 
   _initCamera() {
@@ -92,7 +91,8 @@ export class Game {
         || this.diary?.isOpen()
         || !!this.continuePrompt?.isVisible()
         || !!document.querySelector('.credits-overlay')
-        || !!document.querySelector('.trigger-warning:not(.hidden)');
+        || !!document.querySelector('.trigger-warning:not(.hidden)')
+        || !!document.querySelector('.intro-screen:not(.hidden)');
   }
 
   /** Callback für UI, die User zum Re-Engage auffordern muss. */
@@ -180,11 +180,17 @@ export class Game {
     }
     this.activeMiniGame = minigame;
     if (this.player.isLocked()) this.player.unlock();
-    const result = await minigame.run();
-    this.activeMiniGame = null;
+    let result = 'failed';
+    try {
+      result = await minigame.run();
+    } catch (err) {
+      // Crash im Mini-Game darf NIEMALS isUIBlocked permanent halten
+      console.error('[Game] Mini-Game threw:', err);
+    } finally {
+      this.activeMiniGame = null;
+    }
 
     // EXPLIZITE Continue-Overlay — 100% zuverlässig, kein Auto-Lock-Glücksspiel.
-    // User MUSS klicken, Click-Gesture triggert Pointer-Lock garantiert.
     if (!this.player.isLocked()) {
       await this.continuePrompt.wait('Mini-Spiel beendet');
     }

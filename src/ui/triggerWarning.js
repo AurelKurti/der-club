@@ -16,7 +16,7 @@ export function createTriggerWarning(onAcknowledge, saveManager) {
         Gewalt, sexualisierte Gewalt, Selbstverletzung und Suizid</strong>.
       </p>
       <p class="small">
-        Die Darstellung erfolgt symbolisch und nie explizit — das Spiel zeigt
+        Die Darstellung erfolgt symbolisch und nie explizit -  das Spiel zeigt
         keine gewaltvollen Bilder.
       </p>
       <button class="tw-btn">Ich habe verstanden</button>

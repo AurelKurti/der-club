@@ -77,11 +77,11 @@ export class ManorHouse extends BaseRoom {
       if (briefRead) return;
       briefRead = true;
       await this.ctx.dialog.show([
-        { text: 'Ein Briefumschlag. Auf der Rückseite ein gelbes Wachssiegel — ein Schmetterling.' },
+        { text: 'Ein Briefumschlag. Auf der Rückseite ein gelbes Wachssiegel -  ein Schmetterling.' },
         { text: 'Die Schrift auf dem Kuvert: «Charlotte Farewell.»' },
         { text: 'Innen liegt ein medizinisches Gutachten. Datum: vor vier Jahren.' },
         { speaker: 'Charlotte', text: '«Das habe ich niemandem gezeigt. Nicht einmal meinem Vater.»' },
-        { text: 'Ich lese, was der Arzt geschrieben hat — dann lege ich den Bericht zurück.' },
+        { text: 'Ich lese, was der Arzt geschrieben hat -  dann lege ich den Bericht zurück.' },
         { text: 'Die Worte auf dem Papier sind klinisch. Was sie bedeuten, ist das Gegenteil.' }
       ]);
       this.ctx.inventory.add({ id: 'brief' });
@@ -196,7 +196,7 @@ export class ManorHouse extends BaseRoom {
 
     this.addInteractable(body, async () => {
       await this.ctx.dialog.show([
-        { text: 'Eine alte Standuhr — ohne Zeiger.' },
+        { text: 'Eine alte Standuhr -  ohne Zeiger.' },
         { text: 'Zeit bedeutet hier nichts.' }
       ]);
     }, 'Standuhr');
@@ -262,7 +262,7 @@ export class ManorHouse extends BaseRoom {
     this.addInteractable(frame, async () => {
       await this.ctx.dialog.show([
         { text: 'Ein silberner Rahmen mit einem Foto.' },
-        { text: 'Angus, seine Frau — und ein kleines blondes Mädchen mit Zahnlücke.' },
+        { text: 'Angus, eine blonde Frau und ein kleines Mädchen. Charlotte, vielleicht sechs.' },
         { text: 'Charlotte als Kind.' }
       ]);
     }, 'Silberrahmen');
@@ -305,7 +305,7 @@ export class ManorHouse extends BaseRoom {
         text: 'Charlotte und ich schliefen auf dem Boden in zwei Daunenschlafsäcken. Sie erzählte mir vom Tod ihrer Mutter. Ich gab ihr die rotgoldene Kette meiner Mutter.'
       });
       if (this._exitCone) this._exitCone.visible = true;
-      this.ctx.objective.done('Nacht in Somerset', 'Verlasse das Haus — der Boxkampf wartet.');
+      this.ctx.objective.done('Nacht in Somerset', 'Verlasse das Haus -  der Boxkampf wartet.');
     }, 'Charlotte');
   }
 
