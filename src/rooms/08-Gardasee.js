@@ -379,8 +379,10 @@ export class Gardasee extends BaseRoom {
         <p class="credit-line">Nach dem Roman <em>Der Club</em> von <strong>Takis Würger</strong></p>
         <p class="credit-line-small">Kein &amp; Aber, 2016</p>
         <p class="credit-section">Ein Schulprojekt von</p>
-        <p class="credit-line"><strong>Aurel Kurti</strong></p>
-        <p class="credit-line-small">Adaption für den Literatur-Unterricht. Bewusste Vereinfachungen und Verdichtungen - verbindlich ist der Roman.</p>
+        <p class="credit-line"><strong>Aurel Curti</strong></p>
+        <p class="credit-line"><strong>Loris Ruoss</strong></p>
+        <p class="credit-line"><strong>Pongsapat Boonaek</strong></p>
+        <p class="credit-line-small" style="margin-top:14px;">Adaption für den Literatur-Unterricht. Bewusste Vereinfachungen und Verdichtungen - verbindlich ist der Roman.</p>
         <p class="credit-line-small" style="margin-top:18px;">Assets: prozedural · Sounds: Web Audio API · Engine: Three.js</p>
         <div class="credits-buttons">
           <button class="credits-replay">Noch einmal beginnen</button>

@@ -336,7 +336,7 @@ export class AlexBuero extends BaseRoom {
         this.ctx.save.addDiaryEntry({
           room: this.id,
           title: 'Alex\' Büro',
-          text: 'Alex hat mir die Wahrheit gesagt. Der Pitt Club. Die Schmetterlinge. Vierzig Jahre alt ist ihr Geheimnis. Ein Mann namens Angus führte sie damals in einen Hinterraum. Jetzt will sie Rache -  und ich bin ihr Werkzeug. Ich heisse ab heute Hans Stichler.'
+          text: 'Alex hat mir von den Schmetterlingen erzählt. Eine Gruppe im Pitt Club, die Studentinnen drogt. Sie schweigt über ihre eigene Geschichte - vor vierzig Jahren, sagt sie, nicht mehr. Ich soll ihr Werkzeug sein. Ich heisse ab heute Hans Stichler. Im Zimmer nebenan wohnt Peter Wong, Chinese, der jeden Morgen um sieben aufsteht und fünfzig Liegestützen macht. «Losung des Tages: Der Beste sein.»'
         });
         this._firstVisit = false;
         this.ctx.objective.set('Nimm den Tarn-Ausweis vom Schreibtisch.');
@@ -352,11 +352,11 @@ export class AlexBuero extends BaseRoom {
     // Goya-Bild klickbar
     this.addInteractable(this._goyaRef, async () => {
       await this.ctx.dialog.show([
-        { speaker: 'Alex', text: '«Goya war 1792 taub geworden. Er malte vierzehn Bilder auf die Wände seines Esszimmers.»' },
-        { speaker: 'Alex', text: '«Eines zeigt Saturn, der seinen Sohn verschlingt, weil ein Orakel ihm vorausgesagt hatte, dass einer seiner Söhne ihn stürzen würde.»' },
+        { speaker: 'Alex', text: '«Goya war Anfang 1792 taub geworden. Er zog in eine Villa ausserhalb von Madrid.»' },
+        { speaker: 'Alex', text: '«Er malte vierzehn Bilder auf die Wände seines Esszimmers. Eines zeigt Saturn, der seinen Sohn verschlingt.»' },
         { speaker: 'Alex', text: '«Das ist die Welt, in die ich dich schicke.»' }
       ]);
-    }, 'Pinturas negras -  Goya');
+    }, 'Saturn verschlingt seinen Sohn');
 
     // Tarn-Ausweis auf dem Schreibtisch (erst nach Alex-Dialog sichtbar)
     const cardMat = new THREE.MeshStandardMaterial({

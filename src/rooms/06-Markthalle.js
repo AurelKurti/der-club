@@ -298,6 +298,21 @@ export class Markthalle extends BaseRoom {
         await this.ctx.dialog.show('Ich habe gewonnen. Der Ring steht leer.');
         return;
       }
+      // Kette-Übergabe auf dem Dach vor dem Kampf (Buch Kap. 33).
+      // Nur wenn Hans die Kette aus Raum 1 noch mit sich trägt.
+      if (this.ctx.inventory.has('kette')) {
+        await this.ctx.dialog.show([
+          { text: 'Vor dem Kampf stand ich mit Charlotte auf dem Dach der Halle.' },
+          { text: 'Ich sah die Schnittnarben an ihren Unterarmen. Ich nahm die rotgoldene Kette aus meiner Tasche.' },
+          { text: 'Ich legte sie ihr um den Hals. Sie sagte nichts.' }
+        ]);
+        this.ctx.inventory.remove?.('kette');
+        this.ctx.save.addDiaryEntry({
+          room: this.id,
+          title: 'Vor dem Kampf',
+          text: 'Auf dem Dach der Markthalle gab ich Charlotte die Kette meiner Mutter. Ich sah die Narben an ihren Unterarmen. Sie sagte nichts.'
+        });
+      }
       await this.ctx.dialog.show([
         { speaker: 'Trainer Priest', text: '«Drei Runden. Du gehst da rein und kommst als Sieger raus.»' }
       ]);

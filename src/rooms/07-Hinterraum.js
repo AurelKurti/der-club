@@ -424,11 +424,13 @@ export class Hinterraum extends BaseRoom {
         { text: 'Ich brachte sie in das Claire-Hall-Gästezimmer. Zimmer 42.' }
       ]);
 
-      // Alex-Echo — ihre Stimme, nicht sichtbar, nach der Rettung
+      // Aha-Moment via Kastanie + Glaskasten (Buch Kap. 46):
+      // Hans spürt Billys Kastanie in der Tasche, sieht den gelben
+      // Schmetterling im Glaskasten - und versteht das Zeichen.
       await this.ctx.dialog.show([
-        { text: 'An der Wand unter dem Billardtisch sah ich eine Inschrift, in die Holzleiste geritzt: «AB -  1986».' },
-        { speaker: 'Alex (in meinem Kopf)', text: '«Ich war einmal an diesem Tisch. Ich habe den ganzen Raum vergessen -  ausser dieser Inschrift.»' },
-        { text: 'Dann floh ich nach Hannover.' }
+        { text: 'Ich spürte Billys Kastanie in meiner Tasche. Dann sah ich den gelben Schmetterling im Glaskasten.' },
+        { text: 'Das Zeichen in der Fliege. Das Zeichen auf dem Siegel. Das Zeichen hier.' },
+        { text: 'Es war nie einzeln. Es war ein Ring, der seit Jahrzehnten bestand.' }
       ]);
 
       if (this._exitCone) this._exitCone.visible = true;

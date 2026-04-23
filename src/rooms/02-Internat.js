@@ -193,11 +193,16 @@ export class InternatKeller extends BaseRoom {
         return;
       }
       paterTalked = true;
+      // Kontext: warum Hans hier ist (Buch Kap. 5). Ohne das wirkt der
+      // Keller wie eine beliebige Trainingshalle.
+      await this.ctx.dialog.show([
+        { text: 'Ich hatte einen Mitschüler im Esssaal niedergeschlagen. Zur Strafe wurde ich in den Weinkeller geschickt, zu Pater Gerald.' }
+      ]);
       await this.ctx.dialog.show(CHAR.paterGerald.keller);
       this.ctx.save.addDiaryEntry({
         room: this.id,
         title: 'Johannes-Kolleg, Winter',
-        text: 'Pater Gerald trainiert mich heimlich im Weinkeller. Er war Boxer. Er sagt, ich solle das Gegenteil von dem tun, was mein Gegner erwartet.'
+        text: 'Zur Strafe für die Schlägerei im Esssaal schickten sie mich in den Weinkeller. Dort trainiert mich Pater Gerald heimlich. Er war Boxer. Er sagt, ich solle das Gegenteil von dem tun, was mein Gegner erwartet.'
       });
       this.ctx.objective.set('Klicke auf die Box-Pratzen für das Training.');
     }, 'Pater Gerald');

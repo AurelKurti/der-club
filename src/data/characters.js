@@ -12,7 +12,8 @@ export const CHAR = {
     tint: 0xffe4a0,
     garten: [
       { speaker: 'Mutter', text: '«Ich kenne jedes Kraut in diesem Wald.»' },
-      { text: 'In meiner frühsten Erinnerung läuft meine Mutter mit nackten Füssen durch den Garten auf mich zu. Sie trägt ein gelbes Kleid aus Leinen.' }
+      { text: 'In meiner frühsten Erinnerung läuft meine Mutter mit nackten Füssen durch den Garten auf mich zu. Sie trägt ein gelbes Kleid aus Leinen.' },
+      { text: '[Sie starb, bevor ich fünfzehn war. Ein Bienenstich, den ihr Herz nicht verzieh.]' }
     ]
   },
 
@@ -22,7 +23,8 @@ export const CHAR = {
     werkbank: [
       { speaker: 'Vater', text: '«Meistens ist alles im Leben grau.»' },
       { speaker: 'Vater', text: '«Aber manchmal gibt es nur Richtig und Falsch. Und wenn Stärkere Schwächeren Leid antun, ist das falsch.»' },
-      { text: 'Er legte zwei schwarze Boxhandschuhe aus Rindsleder neben meinen Teller.' }
+      { text: 'Er legte zwei schwarze Boxhandschuhe aus Rindsleder neben meinen Teller.' },
+      { text: '[Er starb auf der Brücke über die Havel. Zementlaster. Ich blieb allein zurück. Kurz danach holte mich Tante Alex ins Internat.]' }
     ]
   },
 
@@ -48,11 +50,10 @@ export const CHAR = {
     ],
     buero_backstory: [
       { text: 'Alex dreht sich zum Fenster. Regen läuft an der Scheibe herunter.' },
-      { speaker: 'Alex', text: '«Ich war achtzehn, als ich hier ankam. Aus Stoke-on-Trent. Meine Mutter hat Porzellan bemalt.»' },
-      { speaker: 'Alex', text: '«Vor vierzig Jahren gab es einen Mann, der war für mich freundlich. Er hiess Angus.»' },
-      { speaker: 'Alex', text: '«Er hat mich in den Pitt Club eingeladen. In einen Hinterraum. Auf einen Billardtisch.»' },
+      { speaker: 'Alex', text: '«Ich war achtzehn, als ich hier ankam. Aus Stoke-on-Trent.»' },
+      { speaker: 'Alex', text: '«Vor vierzig Jahren haben sie etwas getan, das ich nie verwunden habe. Mehr musst du jetzt nicht wissen.»' },
       { text: 'Pause. Sie atmet laut ein.' },
-      { speaker: 'Alex', text: '«Ich habe es vierzig Jahre niemandem gesagt. Jetzt sag ich es dir, weil ich Charlotte nicht verlieren will wie mich selbst.»' },
+      { speaker: 'Alex', text: '«Ich will Charlotte nicht verlieren wie mich selbst.»' },
       { speaker: 'Alex', text: '«Was den Menschen vom Pavian unterscheidet, ist nicht die Würde. Es ist die Rache.»' }
     ]
   },
@@ -110,7 +111,10 @@ export const CHAR = {
     profile: 'magicMike',
     color: 0x8888a0,
     halle: [
-      { speaker: 'Magic Mike', text: '«Gott hat mir dieses Team als Prüfung gegeben.»' }
+      // Aus dem Buch Kap. 35: Mike summt vor dem Kampf Wagner und sagt
+      // den berühmten Satz über das Team - hier leicht verdichtet.
+      { text: 'Magic Mike summt eine Arie. Wagner, erkenne ich.' },
+      { speaker: 'Magic Mike', text: '«Priest ein Verbrecher. Josh ein Psycho. Billy ein Homo. Und du, Stichler, ein Deutscher. Was für ein Team.»' }
     ]
   }
 };

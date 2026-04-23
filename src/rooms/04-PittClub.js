@@ -61,14 +61,14 @@ export class PittClub extends BaseRoom {
     scene.add(wall);
     this.addCollider(wall);
 
-    // 6 ionische Säulen
+    // 4 ionische Säulen (Buch Kap. 16: "vier ionische Säulen")
     const columnMat = new THREE.MeshStandardMaterial({
       color: 0xf0e4c8,
       roughness: 0.4,
       emissive: 0x1a1408,
       emissiveIntensity: 0.1
     });
-    const columnPositions = [-5, -3, -1, 1, 3, 5];
+    const columnPositions = [-3.6, -1.2, 1.2, 3.6];
     columnPositions.forEach((x) => {
       const shaft = new THREE.Mesh(
         new THREE.CylinderGeometry(0.35, 0.4, 6, 16),
@@ -222,18 +222,18 @@ export class PittClub extends BaseRoom {
       angusTalked = true;
       await this.ctx.dialog.show(CHAR.angus.pittclub);
       this.ctx.inventory.add({ id: 'pitt-fliege' });
-      // Zweite Dialog-Szene: väterlicher Angus zeigt Familienfoto (setzt Doppelrolle)
+      // Angus bittet Hans, auf Charlotte aufzupassen (Buch Kap. 19).
+      // Das gelbe Schmetterling-Innere der Fliege bleibt hier noch
+      // unbemerkt - die Verbindung zum Geheimnis erkennt Hans erst
+      // im Hinterraum (Kap. 46).
       await this.ctx.dialog.show([
-        { text: 'Angus zog ein kleines Lederetui aus der Brusttasche.' },
-        { text: 'Darin: ein verblichenes Foto einer Familie -  er, eine blonde Frau, ein kleines Mädchen.' },
-        { speaker: 'Angus', text: '«Das ist meine Charlotte. Sie ist das Einzige, was mir geblieben ist.»' },
-        { speaker: 'Angus', text: '«Pass auf sie auf, Hans. Bitte.»' },
-        { text: 'Ich nickte. Ich wusste noch nicht, dass er der Mann war, den Alex vor vierzig Jahren mir gezeigt hatte.' }
+        { speaker: 'Angus', text: '«Charlotte. Pass auf sie auf, Hans. Bitte.»' },
+        { text: 'Ich nickte. Ich wusste noch nicht, was er wirklich war.' }
       ]);
       this.ctx.save.addDiaryEntry({
         room: this.id,
         title: 'Pitt Club, Nacht',
-        text: 'Angus hat mir die Fliege umgebunden. Innen ein kleiner gelber Schmetterling -  das geheime Zeichen. Ich gehöre jetzt zu ihnen. Er bat mich, auf Charlotte aufzupassen, als wäre er ein Vater. Ich spürte Ekel.'
+        text: 'Angus hat mir die Fliege umgebunden. Er bat mich, auf Charlotte aufzupassen, als wäre er ein Vater. Ich gehöre jetzt zu ihnen.'
       });
       if (this._exitCone) this._exitCone.visible = true;
       this.ctx.objective.done('Aufnahme in den Pitt Club', 'Folge dem goldenen Licht.');

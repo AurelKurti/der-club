@@ -298,11 +298,13 @@ export class ManorHouse extends BaseRoom {
       }
       charlotteTalked = true;
       await this.ctx.dialog.show(CHAR.charlotte.somerset);
+      // Kette bekommt Hans hier - die Übergabe an Charlotte folgt erst
+      // im Buch auf dem Dach vor dem Boxkampf (Kap. 33).
       this.ctx.inventory.add({ id: 'kette' });
       this.ctx.save.addDiaryEntry({
         room: this.id,
         title: 'Manor House, Somerset',
-        text: 'Charlotte und ich schliefen auf dem Boden in zwei Daunenschlafsäcken. Sie erzählte mir vom Tod ihrer Mutter. Ich gab ihr die rotgoldene Kette meiner Mutter.'
+        text: 'Charlotte und ich schliefen auf dem Boden in zwei Daunenschlafsäcken. Sie erzählte mir vom Tod ihrer Mutter. Ich trug die rotgoldene Kette meiner Mutter in der Tasche - bereit, sie ihr zu geben.'
       });
       if (this._exitCone) this._exitCone.visible = true;
       this.ctx.objective.done('Nacht in Somerset', 'Verlasse das Haus -  der Boxkampf wartet.');
