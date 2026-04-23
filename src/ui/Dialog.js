@@ -48,6 +48,13 @@ export class Dialog {
    */
   show(lines) {
     if (typeof lines === 'string') lines = [{ text: lines }];
+    // Overlay-Stacking-Schutz: Dialog NIEMALS über ContinuePrompt oder
+    // Mini-Game-Overlay legen. (Edge-Case-Audit C2/C3)
+    if (document.querySelector('.continue-prompt:not(.hidden)') ||
+        document.querySelector('.minigame-overlay:not(.hidden)')) {
+      console.warn('[Dialog] show() blocked — Continue-Prompt oder Mini-Game aktiv');
+      return Promise.resolve();
+    }
     // Double-invoke-Schutz: altes Dialog sauber abschliessen (altes Promise
     // resolved, damit keine Caller hängen bleiben). Neuer Dialog startet frisch.
     if (this._resolve) {

@@ -34,14 +34,26 @@ export class ContinuePrompt {
     this.el.classList.remove('hidden');
 
     return new Promise((resolve) => {
-      const onClick = () => {
+      let done = false;
+      const finish = () => {
+        if (done) return;
+        done = true;
         this.btn.removeEventListener('click', onClick);
-        // Lock SYNCHRON in der Click-Gesture — hier ist es 100% zuverlässig
+        document.removeEventListener('keydown', onKey);
+        // Lock SYNCHRON in der User-Gesture — hier ist es 100% zuverlässig
         try { this.player?.lock?.(); } catch { /* ignore */ }
         this.el.classList.add('hidden');
         resolve();
       };
+      const onClick = finish;
+      const onKey = (e) => {
+        if (e.code === 'Enter' || e.code === 'Space') {
+          e.preventDefault();
+          finish();
+        }
+      };
       this.btn.addEventListener('click', onClick);
+      document.addEventListener('keydown', onKey);
     });
   }
 

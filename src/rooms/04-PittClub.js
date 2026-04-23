@@ -176,8 +176,8 @@ export class PittClub extends BaseRoom {
   }
 
   _buildLighting(scene) {
-    scene.add(new THREE.AmbientLight(0x303840, 0.35));
-    scene.add(new THREE.HemisphereLight(0x8898b8, 0x202028, 0.2));
+    scene.add(new THREE.AmbientLight(0x4a5868, 0.6));
+    scene.add(new THREE.HemisphereLight(0x8898b8, 0x303040, 0.4));
 
     // Kaltes Mondlicht
     const moon = new THREE.DirectionalLight(0x8898b8, 0.8);

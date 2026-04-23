@@ -35,10 +35,12 @@ export function createStartOverlay(onStart) {
   const controlsEl = el.querySelector('.controls-hint');
   const btn = el.querySelector('.start-btn');
 
+  let clickInFlight = false;
   btn.addEventListener('click', () => {
-    // Lock ZUERST in der Click-Gesture — vor jeder DOM-Mutation.
-    // Browser-Activation-Budget wird durch className-Änderungen nicht beeinflusst,
-    // aber zur Sicherheit halten wir die Reihenfolge sauber.
+    // Spam-Click-Schutz: nur 1 Lock-Request pro Show-Zyklus.
+    // Bei pointerlockerror wird via show() das Overlay wieder freigegeben.
+    if (clickInFlight) return;
+    clickInFlight = true;
     onStart();
     el.classList.add('hidden');
   });
@@ -61,6 +63,7 @@ export function createStartOverlay(onStart) {
   return {
     show: (mode = 'start') => {
       setMode(mode);
+      clickInFlight = false; // neuer Show-Zyklus → Button wieder klickbar
       el.classList.remove('hidden');
     },
     hide: () => el.classList.add('hidden'),

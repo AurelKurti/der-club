@@ -345,10 +345,17 @@ export class Gardasee extends BaseRoom {
 
   _maybeTriggerEnd() {
     if (this._ended) return;
-    if (this._paperRead && this._photoRead && this._charlotteTalked) {
-      this._ended = true;
-      setTimeout(() => this._showCredits(), 1500);
+    // Inkrementelles Feedback — sonst weiss Spieler nie ob Subtask zählt.
+    const remaining = [];
+    if (!this._paperRead) remaining.push('Zeitung lesen');
+    if (!this._photoRead) remaining.push('Foto umdrehen');
+    if (!this._charlotteTalked) remaining.push('mit Charlotte sprechen');
+    if (remaining.length > 0) {
+      this.ctx.objective.set('Noch offen: ' + remaining.join(', ') + '.');
+      return;
     }
+    this._ended = true;
+    setTimeout(() => this._showCredits(), 1500);
   }
 
   _showCredits() {

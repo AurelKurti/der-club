@@ -51,7 +51,19 @@ export class Player {
     document.addEventListener('keyup', onKey(false));
   }
 
-  lock() { this.controls.lock(); }
+  lock() {
+    // PointerLockControls.lock() ruft document.body.requestPointerLock() auf,
+    // welches in Chromium ein Promise zurückgibt das rejecten kann (z.B.
+    // wenn Document nicht fokussiert ist). Wir fangen das damit es nicht als
+    // unhandled-rejection als pageerror auftaucht. pointerlockerror-Handler
+    // in main.js übernimmt die Recovery (zeigt Start-Overlay).
+    try {
+      const result = this.controls.lock();
+      if (result && typeof result.catch === 'function') {
+        result.catch(() => { /* erwartet — Recovery via pointerlockerror-Event */ });
+      }
+    } catch { /* synchroner Throw — ebenfalls erwartet */ }
+  }
   unlock() { this.controls.unlock(); }
   isLocked() { return this.controls.isLocked; }
 

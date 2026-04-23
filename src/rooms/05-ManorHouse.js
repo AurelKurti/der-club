@@ -269,8 +269,8 @@ export class ManorHouse extends BaseRoom {
   }
 
   _buildLighting(scene) {
-    scene.add(new THREE.AmbientLight(0x304058, 0.35));
-    scene.add(new THREE.HemisphereLight(0x9cb0cc, 0x202024, 0.2));
+    scene.add(new THREE.AmbientLight(0x506a8a, 0.6));
+    scene.add(new THREE.HemisphereLight(0x9cb0cc, 0x303040, 0.4));
 
     // Kaltes Mondlicht
     const moon = new THREE.DirectionalLight(0x9cb0cc, 0.8);

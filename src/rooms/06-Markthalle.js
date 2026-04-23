@@ -27,8 +27,8 @@ export class Markthalle extends BaseRoom {
 
   build() {
     const { scene } = this;
-    scene.background = new THREE.Color(0x0a0806);
-    scene.fog = new THREE.FogExp2(0x0a0806, 0.03);
+    scene.background = new THREE.Color(0x1c1610);
+    scene.fog = new THREE.FogExp2(0x1c1610, 0.015);
 
     this._buildFloor(scene);
     this._buildWalls(scene);
@@ -200,8 +200,8 @@ export class Markthalle extends BaseRoom {
   }
 
   _buildLighting(scene) {
-    scene.add(new THREE.AmbientLight(0x3a2a20, 0.4));
-    scene.add(new THREE.HemisphereLight(0xffe8c0, 0x202018, 0.2));
+    scene.add(new THREE.AmbientLight(0x6a4a30, 0.9));
+    scene.add(new THREE.HemisphereLight(0xffe8c0, 0x40302a, 0.4));
 
     // 4 SpotLights über dem Ring (3 hell, 1 tot — Buchdetail)
     const spotPositions = [

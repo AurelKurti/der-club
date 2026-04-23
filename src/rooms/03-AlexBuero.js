@@ -25,8 +25,8 @@ export class AlexBuero extends BaseRoom {
 
   build() {
     const { scene } = this;
-    scene.background = new THREE.Color(0x0c0a08);
-    scene.fog = new THREE.FogExp2(0x0c0a08, 0.04);
+    scene.background = new THREE.Color(0x1c1812);
+    scene.fog = new THREE.FogExp2(0x1c1812, 0.018);
 
     this._buildFloor(scene);
     this._buildWalls(scene);
@@ -298,8 +298,8 @@ export class AlexBuero extends BaseRoom {
   }
 
   _buildLighting(scene) {
-    scene.add(new THREE.AmbientLight(0x402e1e, 0.4));
-    scene.add(new THREE.HemisphereLight(0xffd8b0, 0x202020, 0.2));
+    scene.add(new THREE.AmbientLight(0x6a4e34, 0.8));
+    scene.add(new THREE.HemisphereLight(0xffd8b0, 0x40302a, 0.4));
 
     // Kaltes Tageslicht durchs Fenster
     const window = new THREE.DirectionalLight(0x8898a8, 0.8);

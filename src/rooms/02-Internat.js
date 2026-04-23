@@ -26,8 +26,8 @@ export class InternatKeller extends BaseRoom {
 
   build() {
     const { scene } = this;
-    scene.background = new THREE.Color(0x08080c);
-    scene.fog = new THREE.FogExp2(0x08080c, 0.03);
+    scene.background = new THREE.Color(0x1a1418);
+    scene.fog = new THREE.FogExp2(0x1a1418, 0.015);
 
     this._buildFloor(scene);
     this._buildCeiling(scene);
@@ -139,8 +139,8 @@ export class InternatKeller extends BaseRoom {
 
   _buildLighting(scene) {
     // Deutlich heller als vorher, damit Pater Gerald & Regale sichtbar sind
-    scene.add(new THREE.AmbientLight(0x6a5040, 0.5));
-    scene.add(new THREE.HemisphereLight(0xffd8b0, 0x202020, 0.2));
+    scene.add(new THREE.AmbientLight(0x9a7a5a, 1.0));
+    scene.add(new THREE.HemisphereLight(0xffd8b0, 0x40302a, 0.4));
 
     // Glühbirnen-Reihe mit stärkeren PointLights
     for (let z = -14; z <= 14; z += 7) {

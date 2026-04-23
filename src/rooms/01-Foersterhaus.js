@@ -333,6 +333,8 @@ export class Foersterhaus extends BaseRoom {
     scene.add(mutter);
     this._silhouettes.push(mutter);
     this.addInteractable(mutter, async () => {
+      if (this._mutterTalked) return;
+      this._mutterTalked = true;
       await this.ctx.dialog.show(CHAR.mutter.garten);
     }, 'Mutter');
 
@@ -346,6 +348,8 @@ export class Foersterhaus extends BaseRoom {
     scene.add(vater);
     this._silhouettes.push(vater);
     this.addInteractable(vater, async () => {
+      if (this._vaterTalked) return;
+      this._vaterTalked = true;
       await this.ctx.dialog.show(CHAR.vater.werkbank);
     }, 'Vater');
 
@@ -361,6 +365,8 @@ export class Foersterhaus extends BaseRoom {
     scene.add(alex);
     this._silhouettes.push(alex);
     this.addInteractable(alex, async () => {
+      if (this._alexJungTalked) return;
+      this._alexJungTalked = true;
       await this.ctx.dialog.show(CHAR.alexJung.nacht);
     }, 'Tante Alex');
   }
@@ -368,6 +374,8 @@ export class Foersterhaus extends BaseRoom {
   _buildInteractables(scene) {
     // Kirschbaum klickbar
     this.addInteractable(this._cherryRef, async () => {
+      if (this._cherryTalked) return;
+      this._cherryTalked = true;
       await this.ctx.dialog.show([
         { text: 'Der Kirschbaum. Meine Eltern haben ihn gepflanzt, als ich geboren wurde.' },
         { text: 'Jedes Frühjahr trägt er weiße Blüten.' }

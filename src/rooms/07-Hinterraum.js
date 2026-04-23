@@ -33,8 +33,8 @@ export class Hinterraum extends BaseRoom {
 
   build() {
     const { scene } = this;
-    scene.background = new THREE.Color(0x08060c);
-    scene.fog = new THREE.FogExp2(0x08060c, 0.04);
+    scene.background = new THREE.Color(0x1c1018);
+    scene.fog = new THREE.FogExp2(0x1c1018, 0.02);
 
     this._buildFloor(scene);
     this._buildWalls(scene);
@@ -319,18 +319,23 @@ export class Hinterraum extends BaseRoom {
   }
 
   _buildLighting(scene) {
-    scene.add(new THREE.AmbientLight(0x3a2428, 0.25));
-    scene.add(new THREE.HemisphereLight(0xd8a890, 0x202020, 0.15));
+    scene.add(new THREE.AmbientLight(0x6a3a3a, 0.7));
+    scene.add(new THREE.HemisphereLight(0xd8a890, 0x40302a, 0.35));
 
     // Rosa-dekadente Atmosphäre über Billardtisch
-    const tableLamp = new THREE.PointLight(0xd87840, 1.2, 8);
+    const tableLamp = new THREE.PointLight(0xff8848, 2.0, 12);
     tableLamp.position.set(0, 3, 0);
     scene.add(tableLamp);
 
     // Akzent-Spotlight auf Tür
-    const doorSpot = new THREE.PointLight(0xff8040, 0.6, 10);
+    const doorSpot = new THREE.PointLight(0xff9050, 1.2, 14);
     doorSpot.position.set(0, 2.5, 6);
     scene.add(doorSpot);
+
+    // Fill-Light damit Wände nicht schwarz sind
+    const fill = new THREE.PointLight(0xb88060, 0.8, 16);
+    fill.position.set(0, 3.5, -4);
+    scene.add(fill);
   }
 
   _buildSilhouettes(scene) {
