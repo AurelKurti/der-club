@@ -60,7 +60,7 @@ async function boot() {
     pittclub_manor:        'Im Frühling fuhren wir nach Somerset. Das Haus stand seit Jahren leer.',
     manor_markthalle:      'Drei Wochen später: der Boxkampf gegen Oxford.',
     markthalle_hinterraum: 'Ich wurde in den engeren Kreis aufgenommen. Die Schmetterlinge.',
-    hinterraum_gardasee:   'Wir flohen an den Gardasee. Hans Stichler — der Name, den ich zurückließ.'
+    hinterraum_gardasee:   'Wir flohen an den Gardasee. Hans Stichler - der Name, den ich zurückliess.'
   };
 
   // Chain wiring

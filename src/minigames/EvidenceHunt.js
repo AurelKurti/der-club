@@ -80,7 +80,7 @@ export class EvidenceHunt extends BaseMiniGame {
         <div class="hunt-hint">
           <p><em>Der Billardtisch steht in der Mitte. Die anderen Männer stehen
           regungslos an den Wänden. Auf dem Sofa liegt etwas. Im Kasten leuchtet etwas.</em></p>
-          <p class="tiny">Sammle alle drei Beweise — dann kannst du handeln.</p>
+          <p class="tiny">Sammle alle drei Beweise - dann kannst du handeln.</p>
         </div>
         <div class="hunt-slots">
           ${CLUES.map((c) => `

@@ -27,7 +27,7 @@ export class BoxRhythm extends BaseMiniGame {
     this.hits = 0;
     this.total = 0;
     this.beats = [];
-    this.setTitle('Pater Gerald — Box-Rhythmus');
+    this.setTitle('Pater Gerald - Box-Rhythmus');
     this.setHint('A = linke Pratze · D = rechte Pratze · im Rhythmus');
 
     this.bodyEl.innerHTML = `
@@ -111,7 +111,7 @@ export class BoxRhythm extends BaseMiniGame {
         b.resolved = true;
         this.total++;
         this._updateScore();
-        this._showFeedback('— verpasst', 'miss');
+        this._showFeedback('- verpasst', 'miss');
       }
     }
 

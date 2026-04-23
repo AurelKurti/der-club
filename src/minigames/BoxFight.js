@@ -41,7 +41,7 @@ export class BoxFight extends BaseMiniGame {
   }
 
   start() {
-    this.setTitle('Boxkampf gegen Oxford — 3 Runden');
+    this.setTitle('Boxkampf gegen Oxford - 3 Runden');
     this.setHint('E = Schlag · Shift = Block · A/D = ausweichen');
 
     this.bodyEl.innerHTML = `
@@ -116,7 +116,7 @@ export class BoxFight extends BaseMiniGame {
     this._updateHp();
     this._roundStart = performance.now();
     this._scheduleNextAttack();
-    this._showFeedback(`Runde ${this.round} — Gong!`, 'info');
+    this._showFeedback(`Runde ${this.round} - Gong!`, 'info');
   }
 
   _scheduleNextAttack() {

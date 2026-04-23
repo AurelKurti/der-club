@@ -241,8 +241,9 @@ export class PittClub extends BaseRoom {
   }
 
   _buildExit(scene) {
-    // Eine zentrale Säule wird als Haupt-Interaktion markiert
-    // (wir nutzen die mittlere der 6 — bei Index 2, x = -1)
+    // Eine zentrale Säule wird als Haupt-Interaktion markiert.
+    // Säulen stehen bei x ∈ {-3.6, -1.2, 1.2, 3.6} - wir nutzen die
+    // linke Mittelsäule bei x = -1.2.
     const marker = new THREE.Mesh(
       new THREE.RingGeometry(0.55, 0.65, 32),
       new THREE.MeshBasicMaterial({
@@ -253,7 +254,7 @@ export class PittClub extends BaseRoom {
         depthWrite: false
       })
     );
-    marker.position.set(-1, 0.01, -2.5);
+    marker.position.set(-1.2, 0.01, -2.5);
     marker.rotation.x = -Math.PI / 2;
     scene.add(marker);
     this._columnMarker = marker;
@@ -261,7 +262,7 @@ export class PittClub extends BaseRoom {
     // Transparente Klick-Box vor der linken Mittelsäule
     const triggerMat = new THREE.MeshBasicMaterial({ visible: false });
     const trigger = new THREE.Mesh(new THREE.BoxGeometry(0.8, 3, 0.8), triggerMat);
-    trigger.position.set(-1, 1.5, -2.5);
+    trigger.position.set(-1.2, 1.5, -2.5);
     scene.add(trigger);
 
     let touched = false;

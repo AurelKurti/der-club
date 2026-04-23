@@ -71,7 +71,7 @@ export class Game {
 
     // Toast bei neuem Tagebuch-Eintrag
     this.save.onDiaryChange((entry) => {
-      this.toast.show(`📔 Neuer Tagebuch-Eintrag: «${entry.title}» — drücke T`);
+      this.toast.show(`📔 Neuer Tagebuch-Eintrag: «${entry.title}» - drücke T`);
     });
   }
 

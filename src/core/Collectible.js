@@ -69,7 +69,7 @@ export function registerMiliInteraction(room, miliMesh, roomId) {
     pickedUp = true;
     await room.ctx.dialog.show([
       { text: '[Ein kleines vergilbtes Blatt Papier. Chinesische Zeichen:]' },
-      { speaker: 'Mili', text: '«永远» -  Für immer.' }
+      { speaker: 'Mili', text: '«永远» - Für immer.' }
     ]);
     room.ctx.save.addCollectible(`mili-${roomId}`);
     room.ctx.audio?.pickup();
